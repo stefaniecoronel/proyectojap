@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function(){
     if(respObj.status == "ok"){
       console.log(respObj.data.products)
       cargarArticulos(respObj.data.products)
-      
+      cargarCategoria(respObj.data.catName)
+
     }
   })
   
@@ -14,12 +15,12 @@ function cargarArticulos (arreglo){
   arreglo.forEach((element) =>{
     contenedor.innerHTML += `
     <div class="col-md-5">
-        <div class="card mb-2" style="max-width: 540px;">
-        <div class="row g-0">
+        <div class="card mb-2 h-100" style="max-width: 540px;">
+        <div class="row g-0 h-100">
         <div class="col-md-4">
           <img src="${element.image}" class="img-fluid rounded-start h-100" alt="${element.name}">
         </div>
-        <div class="col-md-8 h-100">
+        <div class="col-md-8 d-flex flex-column justify-content-between">
           <div class="card-body">
             <h5 class="card-title">${element.name}</h5>
             <p class="card-text">${element.description}</p>
@@ -30,6 +31,8 @@ function cargarArticulos (arreglo){
       </div>
     </div>`
 
+  })}
+  let contenedorTitulo=document.getElementById('div-titulo-cat')
+  function cargarCategoria(categoria){
+    contenedorTitulo.innerHTML +=`<h2>${categoria}</h2>`
   }
-)
-}
