@@ -193,3 +193,38 @@ img.h-100 {
   max-height: 40vh;
   object-fit: contain;
 }
+
+#login {
+  width: 40%;
+  height: 80%;
+  box-sizing: border-box;
+  padding: 40px;
+  margin: auto;
+  margin-top: 10%;
+  border: 30px;
+  box-shadow: 2px 2px 2px 2px rgb(158, 157, 157);
+  background-color: white;
+
+}
+
+#botonLogin {
+  background-color: #F09100;
+  text-align: center;
+  font-weight: bolder;
+  box-shadow: 30px black;
+}
+
+#carrito {
+  width: 50%;
+  height: 50%;
+}
+
+#carrito2 {
+  display: flex;
+  justify-content: center;
+}
+
+#coverLogin {
+  background-image: url("../img/fondoJAP.png");
+  background-size:contain;
+}
