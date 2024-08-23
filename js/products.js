@@ -33,6 +33,13 @@ function cargarArticulos (arreglo){
 
   })}
   let contenedorTitulo=document.getElementById('div-titulo-cat')
+  let contenedorBreadcrumb=document.getElementById('breadcrumb-cat')
   function cargarCategoria(categoria){
     contenedorTitulo.innerHTML +=`<h2>${categoria}</h2>`
+    contenedorBreadcrumb.innerHTML +=`<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="categories.html">Categorías</a></li>
+    <li class="breadcrumb-item active" aria-current="page">${categoria}</li>
+  </ol>
+</nav>`
   }

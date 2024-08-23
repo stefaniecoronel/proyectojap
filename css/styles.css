@@ -228,3 +228,11 @@ img.h-100 {
   background-image: url("../img/fondoJAP.png");
   background-size:contain;
 }
+
+.breadcrumb-item a {
+   color: #F09100;
+}
+
+#breadcrumb-cat {
+  padding-left: 10%;
+}
