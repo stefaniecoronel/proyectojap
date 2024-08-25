@@ -18,9 +18,6 @@ function checkSession() {
     const session = localStorage.getItem('session');
     if (session === 'active') {
         console.log('Sesión activa.');
-
-        window.location.href="index.html";
-
     } else {
         console.log('No hay sesión activa.');
         
