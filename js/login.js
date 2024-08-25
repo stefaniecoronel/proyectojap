@@ -1,5 +1,5 @@
 
-let form= document.querySelector("form")
+
 
 
 document.addEventListener ('submit',function(event){
@@ -28,6 +28,5 @@ function checkSession() {
 }
 }
 
-window.onload = checkSession;
 
 
