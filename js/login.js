@@ -1,5 +1,5 @@
 
-let form= document.querySelector("form")
+
 
 
 document.addEventListener ('submit',function(event){
@@ -25,4 +25,10 @@ function checkSession() {
             window.location.href = 'login.html'; // Redirige después de un breve retraso   
 }
 }
+<<<<<<< Updated upstream
 window.onload = checkSession;
+=======
+
+
+
+>>>>>>> Stashed changes
