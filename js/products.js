@@ -29,7 +29,7 @@ function cargarArticulos (arreglo){
           </div>
         </div>
       </div>
-    </div>`
+    </div>
 
   })}
   let contenedorTitulo=document.getElementById('div-titulo-cat')
