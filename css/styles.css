@@ -248,10 +248,15 @@ img.h-100 {
   .identificadorContainer{
     margin-top: 40%;
   }
-  form{
+  .form-label{
     text-align: center;
+    font-size:  60%;
   }
-  #botonLogin{
+  #botonLogin2{
     text-align: center;
+    font-size: 40%;
   } 
+  .container{
+    font-size: 60%;
+  }
 }
