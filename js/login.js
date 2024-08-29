@@ -12,7 +12,13 @@ document.addEventListener ('submit',function(event){
         window.location.href="index.html";
 
     }
-} )
+
+    const session = localStorage.getItem('session');
+    const nombreUsuario = document.getElementById(NombreUsuario)
+    if (session === 'active'){
+        nombreUsuario.innerHTML += `
+    }
+})
 
 function checkSession() {
     const session = localStorage.getItem('session');
