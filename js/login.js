@@ -1,8 +1,3 @@
-
-
-
-
-
 document.addEventListener ('submit',function(event){
     event.preventDefault();
     let contraseña = document.getElementById ("contraseña").value;
@@ -22,17 +17,6 @@ document.addEventListener ('submit',function(event){
 } )
 
 
-document.addEventListener ('DOMContentLoaded', function ponerUsuario(){
-    let contenedorUsuario = document.getElementById("inicio");
-    let usuarioInicio = localStorage.getItem ('nombre');
-    const session = localStorage.getItem('session');
-    if (session === 'active'){
-        contenedorUsuario.innerHTML += usuarioInicio
-    }
-    else {
-        contenedorUsuario.innerHTML += "Iniciar Sesión"
-
-}})
 
 function checkSession() {
     const session = localStorage.getItem('session');

@@ -39,3 +39,19 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+document.addEventListener ('DOMContentLoaded', function ponerUsuario(){
+  let contenedorUsuario = document.getElementById("inicio");
+  let usuarioInicio = localStorage.getItem ('nombre');
+  const session = localStorage.getItem('session');
+  if (session === 'active'){
+      contenedorUsuario.innerHTML += usuarioInicio
+    
+
+  }
+  //else {
+      //contenedorUsuario.innerHTML += "Iniciar Sesión"
+      //contenedorUsuario2.innerHTML += "Iniciar Sesión"
+      //contenedorUsuario3.innerHTML += "Iniciar Sesión"}
+
+})
