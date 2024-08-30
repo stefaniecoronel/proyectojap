@@ -14,7 +14,7 @@ let contenedor=document.getElementById('listado-articulos')
 function cargarArticulos (arreglo){
   arreglo.forEach((element) =>{
     contenedor.innerHTML += `
-    <div class="col-md-5">
+    <div class="col-lg-5 justify-content-center d-flex">
         <div class="card mb-2 h-100" style="max-width: 540px;">
         <div class="row g-0 h-100">
         <div class="col-md-4">
