@@ -1,6 +1,9 @@
 
 document.addEventListener('DOMContentLoaded', function(){
-  getJSONData("https://japceibal.github.io/emercado-api/cats_products/101.json").then(function(respObj){
+  let catID = localStorage.getItem("catID")
+  console.log (catID)
+  let direccion =`https://japceibal.github.io/emercado-api/cats_products/${catID}.json`
+  getJSONData(direccion).then(function(respObj){
     if(respObj.status == "ok"){
       console.log(respObj.data.products)
       cargarArticulos(respObj.data.products)
@@ -10,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function(){
   })
   
 })
+
+
 let contenedor=document.getElementById('listado-articulos')
 function cargarArticulos (arreglo){
   arreglo.forEach((element) =>{
