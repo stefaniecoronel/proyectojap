@@ -246,6 +246,7 @@ img.h-100 {
 @media screen and (max-width: 320px) {
   .identificadorContainer{
     margin-top: 40%;
-
-}
+}}
+#buscador{
+  text-align: center;
 }
