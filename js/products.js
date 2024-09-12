@@ -66,23 +66,28 @@ let contenedor=document.getElementById('listado-articulos')
 function cargarArticulos (arreglo){
   contenedor.innerHTML = ""
   arreglo.forEach((element) =>{
-    contenedor.innerHTML += `
-    <div class="col-md-5">
-        <div class="card mb-2 h-100" style="max-width: 540px;">
-        <div class="row g-0 h-100">
-        <div class="col-md-4">
-          <img src="${element.image}" class="img-fluid rounded-start h-100" alt="${element.name}">
-        </div>
-        <div class="col-md-8 d-flex flex-column justify-content-between">
-          <div class="card-body">
-            <h5 class="card-title">${element.name}</h5>
-            <p class="card-text">${element.description}</p>
-            <h5 class="card-title">${element.currency} ${element.cost}</h5>
-            <p class="card-text mt-auto"><small class="text-muted">${element.soldCount} unidades vendidas.</small></p>
-          </div>
-        </div>
-      </div>
-    </div>`
+    //Por cada elemento del arreglo me fijo si está definido el rango de precios y si este queda
+    //dento del mismo.
+    if (((minCost == undefined) || (minCost != undefined && parseInt(element.cost) >= minCost)) &&
+        ((maxCost == undefined) || (maxCost != undefined && parseInt(element.cost) <= maxCost))) {
+          contenedor.innerHTML += `
+          <div class="col-lg-5 justify-content-center d-flex">
+              <div class="card mb-2 h-100" style="max-width: 540px;">
+              <div class="row g-0 h-100">
+              <div class="col-md-4">
+                <img src="${element.image}" class="img-fluid rounded-start h-100" alt="${element.name}">
+              </div>
+              <div class="col-md-8 d-flex flex-column justify-content-between">
+                <div class="card-body">
+                  <h5 class="card-title">${element.name}</h5>
+                  <p class="card-text">${element.description}</p>
+                  <h5 class="card-title">${element.currency} ${element.cost}</h5>
+                  <p class="card-text mt-auto"><small class="text-muted">${element.soldCount} unidades vendidas.</small></p>
+                </div>
+              </div>
+            </div>
+          </div>`
+        }
 
   })}
   let contenedorTitulo=document.getElementById('div-titulo-cat')
@@ -100,3 +105,7 @@ function cargarArticulos (arreglo){
   }
 
   
+function setProductID(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html"
+}
