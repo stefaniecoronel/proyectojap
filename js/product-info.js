@@ -17,13 +17,17 @@ let imagenes = document.getElementById("imagenes");
 
 function cargarProducto(producto){
     let arregloImagenes = producto.images
-    arregloImagenes.forEach((element) => {
-        imagenes.innerHTML+=`<div class="carousel-item active">
-        <img src=${element} class="d-block w-100" alt="auto">
+    imagenes.innerHTML = "" ;
+    if (arregloImagenes.length>0){
+        imagenes.innerHTML +=`<div class="carousel-item active">
+        <img src=${arregloImagenes[0]} class="d-block w-100" alt="auto">
         </div>`
-    });
+        for(let i = 1; i < arregloImagenes.length; i++){
+        imagenes.innerHTML+=`<div class="carousel-item">
+        <img src=${arregloImagenes[i]} class="d-block w-100" alt="auto">
+        </div>`
+        }
+    }    
 };
 
-//<div class="carousel-item">
-//<img src="" class="d-block w-100" alt="...">
-//</div>
+
