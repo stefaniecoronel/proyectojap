@@ -71,7 +71,7 @@ function cargarArticulos (arreglo){
     if (((minCost == undefined) || (minCost != undefined && parseInt(element.cost) >= minCost)) &&
         ((maxCost == undefined) || (maxCost != undefined && parseInt(element.cost) <= maxCost))) {
           contenedor.innerHTML += `
-          <div class="col-lg-5 justify-content-center d-flex">
+          <div onclick="setProductID(${element.id})"  class="col-lg-5 justify-content-center d-flex">
               <div class="card mb-2 h-100" style="max-width: 540px;">
               <div class="row g-0 h-100">
               <div class="col-md-4">
@@ -155,5 +155,10 @@ function cargarArticulos (arreglo){
 
     //Una vez ordenados los artículos, los muestro y tengo en cuenta intervalo de precios con la siguiente función:
     cargarArticulos(currentProductsArray);
+}
+
+function setProductID(id) {
+  localStorage.setItem("ProductID", id);
+  window.location = "product-info.html"
 }
   
