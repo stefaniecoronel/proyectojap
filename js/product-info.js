@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 });
 
-let contenedorProducto = document.getElementById("containerProduct");
+let contenedorInfo = document.getElementById("info");
 let imagenes = document.getElementById("imagenes");
 
 function cargarProducto(producto){
@@ -28,6 +28,12 @@ function cargarProducto(producto){
         </div>`
         }
     }    
+    contenedorInfo.innerHTML = `<div class="card-body">
+        <h5 class="card-title">${producto.name}</h5>
+        <p class="card-text">${producto.description}</p>
+        <h5 class="card-title">${producto.currency} ${producto.cost}</h5>
+        <p class="card-text mt-auto"><small class="text-muted">${producto.soldCount} unidades vendidas.</small></p>
+        </div>`
 };
 
 
