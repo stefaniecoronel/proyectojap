@@ -234,7 +234,7 @@ img.h-100 {
 }
 
 #breadcrumb-cat {
-  padding-left: 10%;
+  padding-left: 3rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -246,6 +246,6 @@ img.h-100 {
 @media screen and (max-width: 320px) {
   .identificadorContainer{
     margin-top: 40%;
+}}
 
-}
-}
+
