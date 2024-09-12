@@ -45,7 +45,7 @@ document.addEventListener ('DOMContentLoaded', function ponerUsuario(){
   let usuarioInicio = localStorage.getItem ('nombre');
   const session = localStorage.getItem('session');
   if (session === 'active'){
-      contenedorUsuario.innerHTML += usuarioInicio
+      contenedorUsuario.innerHTML += usuarioInicio;
     
 
   }
