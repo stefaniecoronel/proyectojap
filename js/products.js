@@ -160,3 +160,28 @@ function setProductID(id) {
   localStorage.setItem("productID", id);
   window.location = "product-info.html"
 }
+
+let busqueda = document.getElementById('buscar').value
+
+busqueda.addEventListener('input', function() {
+  let resultados = data.filter(products => 
+    products.name.includes(busqueda) ||
+    products.description.includes(busqueda)
+  );
+  
+  mostrarResultados(resultados);
+});
+
+function mostrarResultados(resultados) {
+  let contenedorResultados = document.getElementById('resultados');
+  contenedorResultados.innerHTML = '';
+  if (resultados.length === 0) {
+    contenedorResultados.innerHTML = '<p>No se encontraron resultados.</p>';
+  } else {
+    resultados.forEach(product => {
+      let div = document.createElement('div');
+      div.innerHTML = `<strong>${product.name}</strong>: ${product.description}`;
+      contenedorResultados.appendChild(div);
+    });
+  }
+}
