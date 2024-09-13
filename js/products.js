@@ -110,9 +110,10 @@ function setProductID(id) {
   window.location = "product-info.html"
 }
 
-let busqueda = document.getElementById('buscar').value
+let busqueda = document.getElementById('buscar')
 
 busqueda.addEventListener('input', function() {
+  let busqueda = campoBusqueda.value.toLowerCase();
   let resultados = data.filter(products => 
     products.name.includes(busqueda) ||
     products.description.includes(busqueda)
