@@ -1,5 +1,4 @@
 
-
 document.addEventListener('DOMContentLoaded', function(){
   let catID = localStorage.getItem("catID")
   console.log (catID)
@@ -71,7 +70,7 @@ function cargarArticulos (arreglo){
     if (((minCost == undefined) || (minCost != undefined && parseInt(element.cost) >= minCost)) &&
         ((maxCost == undefined) || (maxCost != undefined && parseInt(element.cost) <= maxCost))) {
           contenedor.innerHTML += `
-          <div class="col-lg-5 justify-content-center d-flex">
+          <div onclick="setProductID(${element.id})" class="col-lg-5 justify-content-center d-flex">
               <div class="card mb-2 h-100" style="max-width: 540px;">
               <div class="row g-0 h-100">
               <div class="col-md-4">
@@ -104,16 +103,67 @@ function cargarArticulos (arreglo){
 </nav>`
   }
 
+  const ORDER_ASC_BY_PRICE = "Az";
+  const ORDER_DESC_BY_PRICE = "Za";
+  const ORDER_BY_PROD_REL = "Rel";
+  let currentProductsArray = [];
+  let currentSortCriteria = undefined;
+  let minCost = undefined;
+  let maxCost = undefined;
+  
+  //Esta función ordena el array que contiene los artículos según distintos criterios:
+  //precio ascendente, descendente y relevancia (definida según cantidad de vendidos)
+  function ordenarArticulos(criteria, array){
+      let result = [];
+      if (criteria === ORDER_ASC_BY_PRICE)
+      {
+          result = array.sort(function(a, b) {
+              if ( a.cost < b.cost ){ return -1; }
+              if ( a.cost > b.cost ){ return 1; }
+              return 0;
+          });
+      }else if (criteria === ORDER_DESC_BY_PRICE){
+          result = array.sort(function(a, b) {
+              if ( a.cost > b.cost ){ return -1; }
+              if ( a.cost < b.cost ){ return 1; }
+              return 0;
+          });
+      }else if (criteria === ORDER_BY_PROD_REL){
+          result = array.sort(function(a, b) {
+              let aCount = parseInt(a.soldCount);
+              let bCount = parseInt(b.soldCount);
+  
+              if ( aCount > bCount ){ return -1; }
+              if ( aCount < bCount ){ return 1; }
+              return 0;
+          });
+      }
+  
+      return result;
+  } 
+  //Esta función recibe un criterio para ordenar los articulos y un arreglo de los mismos.
+  //Permite ordenarlos utilizando la función ordenarArtículos y mostrarlos usando cargarArticulos.
+  function ordenarYCargarArticulos(sortCriteria, productsArray){
+    currentSortCriteria = sortCriteria; //defino el criterio para ordenar
+
+    if(productsArray != undefined){
+        currentProductsArray = productsArray;
+    } //defino el array de artículos
+
+    currentProductsArray = ordenarArticulos(currentSortCriteria, currentProductsArray); //ordeno los artículos
+
+    //Una vez ordenados los artículos, los muestro y tengo en cuenta intervalo de precios con la siguiente función:
+    cargarArticulos(currentProductsArray);
+}
   
 function setProductID(id) {
   localStorage.setItem("productID", id);
   window.location = "product-info.html"
 }
 
-let busqueda = document.getElementById('buscar')
+let busqueda = document.getElementById('buscar').value
 
 busqueda.addEventListener('input', function() {
-  let buscar = busqueda.value.toLowerCase();
   let resultados = data.filter(products => 
     products.name.includes(busqueda) ||
     products.description.includes(busqueda)
