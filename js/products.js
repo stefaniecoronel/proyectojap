@@ -113,7 +113,7 @@ function setProductID(id) {
 let busqueda = document.getElementById('buscar')
 
 busqueda.addEventListener('input', function() {
-  let busqueda = busqueda.value.toLowerCase();
+  let buscar = busqueda.value.toLowerCase();
   let resultados = data.filter(products => 
     products.name.includes(busqueda) ||
     products.description.includes(busqueda)
