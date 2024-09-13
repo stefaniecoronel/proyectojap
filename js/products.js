@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function(){
     cargarArticulos(currentProductsArray);
   });
 
-document.getElementById("rangeFilterCount").addEventListener("click", function(){
+  document.getElementById("rangeFilterCount").addEventListener("click", function(){
     //Obtengo el mínimo y máximo de los intervalos para poder filtrar por precio al usar la función cargarArticulos.
     minCost = document.getElementById("rangeFilterPriceMin").value;
     maxCost = document.getElementById("rangeFilterPriceMax").value;
@@ -57,6 +57,11 @@ document.getElementById("rangeFilterCount").addEventListener("click", function()
     }
     cargarArticulos(currentProductsArray);
   });
+  //Al escribir en el campo input se ejecuta la función buscar.
+  document.getElementById("buscar").addEventListener('input', function(){
+    let busquedaInput = document.getElementById("buscar").value.toLowerCase();
+    buscar (busquedaInput, currentProductsArray);
+  })
 })
 
 
@@ -161,27 +166,14 @@ function setProductID(id) {
   window.location = "product-info.html"
 }
 
-let busqueda = document.getElementById('buscar').value
 
-busqueda.addEventListener('input', function() {
-  let resultados = data.filter(products => 
-    products.name.includes(busqueda) ||
-    products.description.includes(busqueda)
-  );
+//Esta función a partir de un array arma uno nuevo teniendo en cuenta si el string que se busca (busqueda)
+//está incluido en el name y/o la descripción de cada elemento del mismo.
+function buscar (busqueda, array) {
+ let nuevoArray = array.filter (element => element.name.toLowerCase().includes(busqueda)|| 
+                  element.description.toLowerCase().includes(busqueda))
+  console.log(array)
+  console.log(nuevoArray)
+  cargarArticulos(nuevoArray);
   
-  mostrarResultados(resultados);
-});
-
-function mostrarResultados(resultados) {
-  let contenedorResultados = document.getElementById('resultados');
-  contenedorResultados.innerHTML = '';
-  if (resultados.length === 0) {
-    contenedorResultados.innerHTML = '<p>No se encontraron resultados.</p>';
-  } else {
-    resultados.forEach(product => {
-      let div = document.createElement('div');
-      div.innerHTML = `<strong>${product.name}</strong>: ${product.description}`;
-      contenedorResultados.appendChild(div);
-    });
-  }
-}
+} 
