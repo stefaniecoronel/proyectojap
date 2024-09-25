@@ -20,6 +20,11 @@ document.addEventListener('DOMContentLoaded', function(){
     })
 
 });
+//Función para desafiate en proceso.
+document.getElementById("enviar-comentario").addEventListener('click', function(){
+  let comentarioNuevo = document.getElementById('comentario-nuevo').value
+  localStorage.setItem('comentario', comentarioNuevo)
+})
 });
 
 let contenedorInfo = document.getElementById("info");
@@ -161,3 +166,4 @@ function cargarProductosRelacionados (prodRelacionados){
     `
   });
 }
+
