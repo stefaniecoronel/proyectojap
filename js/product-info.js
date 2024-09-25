@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function(){
         infoProduct = respObj.data
         cargarProducto(infoProduct)
         cargarCategoriaBreadcrumb(respObj.data)
+        console.log(respObj.data.relatedProducts)
+        cargarProductosRelacionados(respObj.data.relatedProducts)
     }
     getJSONData(comentariosURL).then(function(respObj){
       if(respObj.status == "ok"){
@@ -141,5 +143,21 @@ function cargarComentarios(comentarios){
     <small>${element.dateTime}</small>
   </a>
   `
+  });
+}
+
+let contenedorProdRelacionados = document.getElementById('productos-relacionados')
+
+function cargarProductosRelacionados (prodRelacionados){
+  contenedorProdRelacionados.innerHTML=""
+  prodRelacionados.forEach(element => {
+    contenedorProdRelacionados.innerHTML+=`
+     <div class="card">
+    <img src="${element.image}" class="card-img-top" alt="foto ${element.name}">
+    <div class="card-body">
+      <h5 class="card-title">${element.name}</h5>
+    </div>
+    </div>
+    `
   });
 }
