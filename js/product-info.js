@@ -19,12 +19,33 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     })
 
-});
+  });
 //Función para desafiate en proceso.
 document.getElementById("enviar-comentario").addEventListener('click', function(){
   let comentarioNuevo = document.getElementById('comentario-nuevo').value
-  localStorage.setItem('comentario', comentarioNuevo)
+  let ratings = document.getElementsByName('rating') 
+  let fechaComentario = formatearFecha()
+  let nombreUsuario = localStorage.getItem('nombre')
+  let producto =  localStorage.getItem('productID')
+  let userRating = 0
+  for (let i=0; i< ratings.length; i++){
+    if (ratings[i].checked){
+        userRating = ratings[i].value
+        break; 
+    }
+  }
+  let review = {identificador:producto, usuario:nombreUsuario, comentario:comentarioNuevo, rating:userRating, fecha:fechaComentario}
+  let comentariosRealizados;
+  if (localStorage.getItem('comentarios-realizados')){
+    comentariosRealizados = JSON.parse(localStorage.getItem('comentarios-realizados'));
+  } else {
+    comentariosRealizados = [];
+  }
+  comentariosRealizados.push(review)
+  localStorage.setItem('comentarios-realizados', JSON.stringify(comentariosRealizados))
+  
 })
+agregarComentario();
 });
 
 let contenedorInfo = document.getElementById("info");
@@ -73,76 +94,11 @@ function cargarComentarios(comentarios){
   comentarios.forEach(element => {
   stars=element.score
   console.log(stars)
-  let starRating =""
-  if (stars<=1.2){
-    starRating=`<i class="fa fa-star checked"></i>
-    <i class="fa fa-star"></i>
-    <i class="fa fa-star"></i>
-    <i class="fa fa-star"></i>
-    <i class="fa fa-star"></i>
-    `
-  } else if (stars>1.2 && stars<=1.7){
-    starRating=`<i class="fa fa-star checked"></i>
-    <i class="fa-regular fa-star-half-stroke checked"></i>
-    <i class="fa fa-star"></i>
-    <i class="fa fa-star"></i>
-    <i class="fa fa-star"></i>
-    `
-  } else if (stars>1.7 && stars<=2.2){
-    starRating=`<i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star"></i>
-    <i class="fa fa-star"></i>
-    <i class="fa fa-star"></i>
-    `
-  } else if (stars>2.2 && stars<=2.7){
-    starRating=`<i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa-regular fa-star-half-stroke checked"></i>
-    <i class="fa fa-star"></i>
-    <i class="fa fa-star"></i>
-    `
-  } else if (stars>2.7 && stars<=3.2){
-    starRating=`<i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star"></i>
-    <i class="fa fa-star"></i>
-    `
-  } else if (stars>3.2 && stars<= 3.7){
-    starRating=`<i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa-regular fa-star-half-stroke checked"></i>
-    <i class="fa fa-star"></i>
-    `
-  } else if (stars>3.7 && stars<= 4.2){
-    starRating=`<i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star"></i>
-    `
-  } else if (stars>4.2 && stars<= 4.7){
-    starRating=`<i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa-regular fa-star-half-stroke checked"></i>
-    `
-  } else if (stars>4.7){
-    starRating=`<i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    <i class="fa fa-star checked"></i>
-    `
-  }
   contenedorComentario.innerHTML +=`
   <a href="#" class="list-group-item list-group-item-action" aria-current="true">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">${element.user}</h5>
-      <small>${starRating}</small>
+      <small>${showStars(stars)}</small>
     </div>
     <p class="mb-1">${element.description}</p>
     <small>${element.dateTime}</small>
@@ -150,6 +106,27 @@ function cargarComentarios(comentarios){
   `
   });
 }
+let contenedorComentariosNuevos = document.getElementById('comentarios-nuevos-contenedor')
+function agregarComentario()  {
+  productoActual = localStorage.getItem('productID')
+  contenedorComentariosNuevos.innerHTML =""
+  let comentariosRealizados = JSON.parse(localStorage.getItem('comentarios-realizados'));
+  console.log(comentariosRealizados)
+  comentariosRealizados.forEach(element => 
+    {if (element.identificador==productoActual){
+      contenedorComentariosNuevos.innerHTML +=`
+      <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">${element.usuario}</h5>
+          <small>${showStars(element.rating)}</small>
+        </div>
+        <p class="mb-1">${element.comentario}</p>
+        <small>${element.fecha}</small>
+      </a>
+      `}}
+  )
+  };
+
 
 let contenedorProdRelacionados = document.getElementById('productos-relacionados')
 
@@ -167,3 +144,87 @@ function cargarProductosRelacionados (prodRelacionados){
   });
 }
 
+function showStars (stars) {
+  let starRating ="";
+  if (stars<=1.2){
+  starRating=`<i class="fa fa-star checked"></i>
+  <i class="fa fa-star"></i>
+  <i class="fa fa-star"></i>
+  <i class="fa fa-star"></i>
+  <i class="fa fa-star"></i>
+  `
+ } else if (stars>1.2 && stars<=1.7){
+  starRating=`<i class="fa fa-star checked"></i>
+  <i class="fa-regular fa-star-half-stroke checked"></i>
+  <i class="fa fa-star"></i>
+  <i class="fa fa-star"></i>
+  <i class="fa fa-star"></i>
+  `
+ } else if (stars>1.7 && stars<=2.2){
+  starRating=`<i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star"></i>
+  <i class="fa fa-star"></i>
+  <i class="fa fa-star"></i>
+  `
+ } else if (stars>2.2 && stars<=2.7){
+  starRating=`<i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa-regular fa-star-half-stroke checked"></i>
+  <i class="fa fa-star"></i>
+  <i class="fa fa-star"></i>
+  `
+ } else if (stars>2.7 && stars<=3.2){
+  starRating=`<i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star"></i>
+  <i class="fa fa-star"></i>
+  `
+ } else if (stars>3.2 && stars<= 3.7){
+  starRating=`<i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa-regular fa-star-half-stroke checked"></i>
+  <i class="fa fa-star"></i>
+  `
+ } else if (stars>3.7 && stars<= 4.2){
+  starRating=`<i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star"></i>
+  `
+ } else if (stars>4.2 && stars<= 4.7){
+  starRating=`<i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa-regular fa-star-half-stroke checked"></i>
+  `
+ } else if (stars>4.7){
+  starRating=`<i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  <i class="fa fa-star checked"></i>
+  `
+ }
+ return starRating;
+};
+
+function formatearFecha(){
+ let fecha = new Date()
+  // Obtener cada parte de la fecha y hora
+ let year = fecha.getFullYear();
+ let month = String(fecha.getMonth() + 1).padStart(2, '0'); // Añadir cero delante si es necesario
+ let day = String(fecha.getDate()).padStart(2, '0');
+
+ let hours = String(fecha.getHours()).padStart(2, '0');
+ let minutes = String(fecha.getMinutes()).padStart(2, '0');
+ let seconds = String(fecha.getSeconds()).padStart(2, '0');
+
+ // Formatear la fecha y hora
+ let formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+ return formattedDate
+}
