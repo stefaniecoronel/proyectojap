@@ -134,7 +134,7 @@ function cargarProductosRelacionados (prodRelacionados){
   contenedorProdRelacionados.innerHTML=""
   prodRelacionados.forEach(element => {
     contenedorProdRelacionados.innerHTML+=`
-     <div class="card">
+     <div class="card" onclick="setProductID(${element.id})">
     <img src="${element.image}" class="card-img-top" alt="foto ${element.name}">
     <div class="card-body">
       <h5 class="card-title">${element.name}</h5>
@@ -227,4 +227,9 @@ function formatearFecha(){
  // Formatear la fecha y hora
  let formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
  return formattedDate
+}
+
+function setProductID(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html"
 }
