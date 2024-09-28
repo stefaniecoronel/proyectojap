@@ -28,24 +28,31 @@ document.getElementById("enviar-comentario").addEventListener('click', function(
   let nombreUsuario = localStorage.getItem('nombre')
   let producto =  localStorage.getItem('productID')
   let userRating = 0
-  for (let i=0; i< ratings.length; i++){
-    if (ratings[i].checked){
-        userRating = ratings[i].value
-        break; 
+  if (comentarioNuevo || (document.querySelector('input[name="rating"]:checked')) ) {
+    for (let i=0; i< ratings.length; i++){
+      if (ratings[i].checked){
+          userRating = ratings[i].value
+          break; 
+      }
     }
-  }
-  let review = {identificador:producto, usuario:nombreUsuario, comentario:comentarioNuevo, rating:userRating, fecha:fechaComentario}
-  let comentariosRealizados;
-  if (localStorage.getItem('comentarios-realizados')){
-    comentariosRealizados = JSON.parse(localStorage.getItem('comentarios-realizados'));
-  } else {
-    comentariosRealizados = [];
-  }
-  comentariosRealizados.push(review)
-  localStorage.setItem('comentarios-realizados', JSON.stringify(comentariosRealizados))
+    let review = {identificador:producto, usuario:nombreUsuario, comentario:comentarioNuevo, rating:userRating, fecha:fechaComentario}
+    let comentariosRealizados;
+    if (localStorage.getItem('comentarios-realizados')){
+      comentariosRealizados = JSON.parse(localStorage.getItem('comentarios-realizados'));
+    } else {
+      comentariosRealizados = [];
+    }
+    comentariosRealizados.push(review)
+    localStorage.setItem('comentarios-realizados', JSON.stringify(comentariosRealizados))
+    
   
-})
-agregarComentario();
+  agregarComentario();
+  }
+  else { 
+    alert ("Debe ingresar un comentario o calificación.")
+  }
+
+});
 });
 
 let contenedorInfo = document.getElementById("info");

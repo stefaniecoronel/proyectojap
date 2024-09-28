@@ -54,36 +54,55 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
+        <div class="pt-3">
+          <h5>Productos relacionados:</h5>
+        </div>
+        <div class="card-group" id="productos-relacionados">
+
+        </div>
       </div>
       <div class="col-md-4">
         <div class="card">
           <div class="card-body" id="info">
           </div>
         </div>
+        <div class="pt-3">
+          <h5>Comentarios:</h5>
+        </div>
+        <div class="list-group" id="comentarios-contenedor">
+
+        </div>
+        <div class="list-group" id="comentarios-nuevos-contenedor"></div>
+      
+        </div>
       </div> 
     </div>
-  </div>
-
-  <div class="list-group" id="comentarios-contenedor">
-
-  </div>
-  <div class="list-group" id="comentarios-nuevos-contenedor"></div>
-
-  </div>
-
-  <div class="card-group" id="productos-relacionados">
-
-  </div>
-
-  <form>
-    <div class="mb-3">
-      <label for="comentario-nuevo" class="form-label">Comentario</label>
-      <input type="text" class="form-control" id="comentario-nuevo" aria-describedby="comentario">
+    <div class="container">
+    <div class="row pt-3">
+      <div class="col-md-12">
+        <form>
+          <div class="mb-3">
+            <label for="comentario-nuevo" class="form-label">Enviá tu comentario:</label>
+            <textarea type="text" class="form-control" id="comentario-nuevo" aria-describedby="comentario"></textarea>
+          </div>
+          <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> </div>
+        
+          <div class="pt-2 d-flex justify-content-center">
+            <button type="submit" id="enviar-comentario" class="btn btn-primary">Enviar</button>
+          </div>
+          
+        </form>
+      </div>
     </div>
-    <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label> </div>
-        </div>
-    <button type="submit" id="enviar-comentario" class="btn btn-primary">Submit</button>
-  </form>
+    </div>  
+  
+  </div>
+
+ 
+
+  
+
+  
 
 
   <footer class="text-muted">
