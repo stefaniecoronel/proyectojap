@@ -46,13 +46,14 @@ document.getElementById("enviar-comentario").addEventListener('click', function(
     localStorage.setItem('comentarios-realizados', JSON.stringify(comentariosRealizados))
     
   
-  agregarComentario();
+   
   }
   else { 
     alert ("Debe ingresar un comentario o calificación.")
   }
-
+  x
 });
+agregarComentario();
 });
 
 let contenedorInfo = document.getElementById("info");
@@ -116,7 +117,7 @@ function cargarComentarios(comentarios){
 let contenedorComentariosNuevos = document.getElementById('comentarios-nuevos-contenedor')
 function agregarComentario()  {
   productoActual = localStorage.getItem('productID')
-  contenedorComentariosNuevos.innerHTML =""
+  contenedorComentariosNuevos.innerHTML = "";
   let comentariosRealizados = JSON.parse(localStorage.getItem('comentarios-realizados'));
   console.log(comentariosRealizados)
   comentariosRealizados.forEach(element => 
