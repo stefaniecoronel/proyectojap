@@ -114,7 +114,7 @@ function cargarComentarios(comentarios){
   console.log(stars)
   contenedorComentario.innerHTML +=`
   <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-    <div class="d-flex w-100 justify-content-between">
+    <div class="d-flex w-100 justify-content-between flex-wrap custom-flex">
       <h5 class="mb-1">${element.user}</h5>
       <small>${showStars(stars)}</small>
     </div>
