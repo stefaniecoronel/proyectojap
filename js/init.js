@@ -40,7 +40,7 @@ let getJSONData = function(url){
     });
 }
 
-document.addEventListener ('DOMContentLoaded', function ponerUsuario(){
+document.addEventListener ('DOMContentLoaded', function (){
   let contenedorUsuario = document.getElementById("dropdown-menu-button");
   let usuarioInicio = localStorage.getItem ('nombre');
   const session = localStorage.getItem('session');
