@@ -41,7 +41,7 @@ let getJSONData = function(url){
 }
 
 document.addEventListener ('DOMContentLoaded', function ponerUsuario(){
-  let contenedorUsuario = document.getElementById("inicio");
+  let contenedorUsuario = document.getElementById("dropdown-menu-button");
   let usuarioInicio = localStorage.getItem ('nombre');
   const session = localStorage.getItem('session');
   if (session === 'active'){

@@ -47,7 +47,7 @@ document.getElementById("enviar-comentario").addEventListener('click', function(
       comentariosRealizados = JSON.parse(localStorage.getItem('comentarios-realizados'));
     } else {
       comentariosRealizados = [];
-    }
+  }
 
     comentariosRealizados.push(review) //Se agrega el comentario realizado al array de comentarios.
     //Se guarda el array de comentarios luego de convertirlo a formato JSON en el local storage.
@@ -256,3 +256,17 @@ function setProductID(id) {
   localStorage.setItem("productID", id);
   window.location = "product-info.html"
 }
+
+document.getElementById("logout").addEventListener("click", function(event) {
+  event.preventDefault(); 
+
+  localStorage.removeItem('usuario'); 
+  localStorage.removeItem('session'); 
+  localStorage.removeItem('contraseña'); 
+
+
+  alert("Cerrando sesión..."); 
+
+  
+  window.location.href = "login.html";
+});
