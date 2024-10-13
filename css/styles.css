@@ -298,3 +298,46 @@ img.h-100 {
 }
 
 
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.profile-container {
+        display: flex;
+        align-items: flex-start;
+        margin: 20px;
+    }
+
+    .profile-image {
+        width: 200px; /* Tamaño grande */
+        height: 200px;
+        border-radius: 50%;
+        margin-right: 30px; /* Espacio entre la imagen y los campos */
+    }
+
+    .form-container {
+        flex: 1; /* Ocupa el espacio restante */
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+  
+    .switch-container {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }

@@ -18,6 +18,14 @@ document.addEventListener('DOMContentLoaded', function(){
         cargarComentarios(respObj.data)
     }
     })
+    let displayMode = localStorage.getItem('nightMode')
+     if (displayMode=="enabled"){
+     document.documentElement.setAttribute('data-bs-theme','dark') //agrego el atributo de bootstrap correspondiente a dark theme a todo el html
+     }
+     else {
+      document.documentElement.setAttribute('data-bs-theme','light') //agrego el atributo de bootstrap correspondiente a light theme a todo el html
+    }
+    
 
   });
 //Al hacer click en el botón enviar del formulario se evalua si hay contenido en el textarea o 
