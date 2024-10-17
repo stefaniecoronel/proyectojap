@@ -59,7 +59,8 @@ document.getElementById('cerrar-sesion').addEventListener('click', function(){
     apellido:"",
     segundoApellido:"",
     email: "",
-    telefono: "" 
+    telefono: "" ,
+    fotoPerfil: "https://via.placeholder.com/150"
 }
   localStorage.setItem('datos-usuario', JSON.stringify(datosUsuarioCierreSesion))
 })
