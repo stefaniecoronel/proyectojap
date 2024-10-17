@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById ('second-lastname').value = datosUsuarioGuardados.segundoApellido
     document.getElementById('email').value =  datosUsuarioGuardados.email
     document.getElementById('phone').value =  datosUsuarioGuardados.telefono
+    document.getElementById('profileImage').src = datosUsuarioGuardados.fotoPerfil
     
     profileForm.addEventListener('submit', function(event){
             event.preventDefault();
@@ -42,7 +43,8 @@ document.addEventListener('DOMContentLoaded', function(){
                     apellido:document.getElementById ('lastname').value,
                     segundoApellido: document.getElementById ('second-lastname').value,
                     email: document.getElementById('email').value,
-                    telefono: document.getElementById('phone').value  
+                    telefono: document.getElementById('phone').value, 
+                    fotoPerfil: localStorage.getItem('foto-perfil')
                 }
                 localStorage.setItem('datos-usuario', JSON.stringify(datosUsuario))
             }
@@ -60,6 +62,22 @@ document.addEventListener('DOMContentLoaded', function(){
   //Se completa el  campo de usuario de my-profile con el usuario utilizado al iniciar sesión.  
   let username = localStorage.getItem('nombre')
   document.getElementById('username').value = username
+
+
+  //Mostrar imagen de perfil subida.
+  let imageURL = ""
+  document.getElementById('fileInput').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+    imageURL = e.target.result;
+    document.getElementById('profileImage').src = imageURL;
+    localStorage.setItem('foto-perfil', imageURL)
+    }
+    reader.readAsDataURL(file);
+    }
+    });
 });
 
 
