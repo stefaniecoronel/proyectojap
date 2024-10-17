@@ -49,13 +49,10 @@ document.addEventListener ('DOMContentLoaded', function (){
     
 
   }
-  //else {
-      //contenedorUsuario.innerHTML += "Iniciar Sesión"
-      //contenedorUsuario2.innerHTML += "Iniciar Sesión"
-      //contenedorUsuario3.innerHTML += "Iniciar Sesión"}
 
 })
 
+//Cuando se cierra sesión se borran los datos de usuario.
 document.getElementById('cerrar-sesion').addEventListener('click', function(){
   datosUsuarioCierreSesion = {
     segundoNombre:"", 
