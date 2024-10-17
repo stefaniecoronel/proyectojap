@@ -29,3 +29,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
+document.addEventListener ('DOMContentLoaded', ()=> {
+    const profileForm = document.getElementById ('profileForm');
+    const userName = document.getElementById ('username')
+    
+    const userLogeado = localStorage.getItem ('userLogeado')
+    
+    
+    if (!userLogeado){
+    window.location.href = 'login.html';
+    } else {
+    userName.value = localStorage.getItem ('nombreUsuario')
+    }
+    }
+    )
