@@ -341,3 +341,8 @@ img.h-100 {
       align-items: center;
       gap: 1.2rem;
     }
+
+#fileBtnContainer {
+  margin-top: 10%;
+}
+
