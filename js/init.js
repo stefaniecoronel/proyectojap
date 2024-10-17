@@ -55,3 +55,14 @@ document.addEventListener ('DOMContentLoaded', function (){
       //contenedorUsuario3.innerHTML += "Iniciar Sesión"}
 
 })
+
+document.getElementById('cerrar-sesion').addEventListener('click', function(){
+  datosUsuarioCierreSesion = {
+    segundoNombre:"", 
+    apellido:"",
+    segundoApellido:"",
+    email: "",
+    telefono: "" 
+}
+  localStorage.setItem('datos-usuario', JSON.stringify(datosUsuarioCierreSesion))
+})
