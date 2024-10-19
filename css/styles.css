@@ -298,25 +298,9 @@ img.h-100 {
 }
 
 
-
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
-
 .profile-container {
         display: flex;
-        align-items: flex-start;
+        align-items:center;
         margin: 20px;
     }
 
@@ -336,7 +320,7 @@ img.h-100 {
     }
 
   
-    .switch-container {
+.switch-container {
       display: flex;
       align-items: center;
       gap: 1.2rem;

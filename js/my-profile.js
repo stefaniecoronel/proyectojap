@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function(){
   document.getElementById('username').value = username
 
 
-  //Mostrar imagen de perfil subida.
+  //Mostrar imagen de perfil subida y guardarla en el localStorage.
   let imageURL = ""
   document.getElementById('fileInput').addEventListener('change', function(event) {
     const file = event.target.files[0];
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function(){
     reader.onload = function(e) {
     imageURL = e.target.result;
     document.getElementById('profileImage').src = imageURL;
-    localStorage.setItem('foto-perfil', imageURL)
+    localStorage.setItem('foto-perfil', imageURL) 
     }
     reader.readAsDataURL(file);
     }
