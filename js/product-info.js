@@ -97,6 +97,7 @@ function cargarProducto(producto){
         <h5 class="card-title">${producto.currency} ${producto.cost}</h5>
         <br>
         <p class="card-text mt-auto"><small class="text-muted">${producto.soldCount} unidades vendidas.</small></p>
+        <button onclick="agregarCarrito('${producto.name}', '${producto.description}', '${producto.currency}', '${producto.cost}', '${producto.soldCount}', '${producto.images[0]}')" class="btn btn-primary">Comprar</button>
         </div>`
 };
 
@@ -265,16 +266,17 @@ function setProductID(id) {
   window.location = "product-info.html"
 }
 
-document.getElementById("logout").addEventListener("click", function(event) {
-  event.preventDefault(); 
+//Al hacer click en el botón comprar, se ejecuta esta función que guarda los datos del producto en el localStorage y redirige a la página del carrito. 
+function agregarCarrito(productName, productDescription, productCurrency, productCost, productSoldCount, productImage) {
+  let productoCarrito = { 
+    name: productName , 
+    description:productDescription , 
+    currency: productCurrency , 
+    cost: productCost , 
+    soldCount:productSoldCount,
+    image: productImage
+  }
+ localStorage.setItem ('producto-carrito', JSON.stringify(productoCarrito))
+ window.location.href = "cart.html";
+}
 
-  localStorage.removeItem('usuario'); 
-  localStorage.removeItem('session'); 
-  localStorage.removeItem('contraseña'); 
-
-
-  alert("Cerrando sesión..."); 
-
-  
-  window.location.href = "login.html";
-});
