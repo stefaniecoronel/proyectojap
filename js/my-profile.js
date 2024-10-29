@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function(){
     let switchNightMode = document.getElementById('SwitchNightMode');
     let profileForm = document.getElementById('profileForm');
 
-    switchNightModeStatus = localStorage.getItem('nightMode')
+    let switchNightModeStatus = localStorage.getItem('nightMode')
     
     //Muestro el botón switch en el último estado que dejó el usuario al guardar cambios 
     if(switchNightModeStatus === 'enabled'){
@@ -17,13 +17,17 @@ document.addEventListener('DOMContentLoaded', function(){
     } else {
         switchNightMode.checked = false; 
     }
+
     let datosUsuarioGuardados = JSON.parse(localStorage.getItem('datos-usuario'))
-    document.getElementById ('second-name').value = datosUsuarioGuardados.segundoNombre
-    document.getElementById ('lastname').value = datosUsuarioGuardados.apellido
-    document.getElementById ('second-lastname').value = datosUsuarioGuardados.segundoApellido
-    document.getElementById('email').value =  datosUsuarioGuardados.email
-    document.getElementById('phone').value =  datosUsuarioGuardados.telefono
-    document.getElementById('profileImage').src = datosUsuarioGuardados.fotoPerfil
+    if (datosUsuarioGuardados != undefined){
+        document.getElementById('second-name').value = datosUsuarioGuardados.segundoNombre
+        document.getElementById('lastname').value = datosUsuarioGuardados.apellido
+        document.getElementById('second-lastname').value = datosUsuarioGuardados.segundoApellido
+        document.getElementById('email').value =  datosUsuarioGuardados.email
+        document.getElementById('phone').value =  datosUsuarioGuardados.telefono
+        document.getElementById('profileImage').src = datosUsuarioGuardados.fotoPerfil
+        
+    }
     
     profileForm.addEventListener('submit', function(event){
             event.preventDefault();
@@ -37,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function(){
             } else {
                 contenedorAlerta.className = 'alert alert-success alert-dismissible fade show'
                 contenedorAlerta.innerHTML = `Datos guardados con éxito. <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`
-
                 let datosUsuario ={
                     segundoNombre:document.getElementById ('second-name').value, 
                     apellido:document.getElementById ('lastname').value,
