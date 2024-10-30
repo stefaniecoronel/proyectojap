@@ -63,4 +63,5 @@ document.getElementById('cerrar-sesion').addEventListener('click', function(){
     fotoPerfil: "https://via.placeholder.com/150"
 }
   localStorage.setItem('datos-usuario', JSON.stringify(datosUsuarioCierreSesion))
+  
 })
