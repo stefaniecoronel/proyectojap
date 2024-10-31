@@ -268,6 +268,10 @@ function setProductID(id) {
 
 //Al hacer click en el botón comprar, se ejecuta esta función que guarda los datos del producto en el localStorage y redirige a la página del carrito. 
 function agregarCarrito(productName, productDescription, productCurrency, productCost, productSoldCount, productImage, productID) {
+  
+  let arregloProductosCarrito = JSON.parse(localStorage.getItem('producto-carrito')) || [];
+  console.log(arregloProductosCarrito)
+
   let productoCarrito = { 
     name: productName , 
     description:productDescription , 
@@ -277,7 +281,10 @@ function agregarCarrito(productName, productDescription, productCurrency, produc
     image: productImage,
     id: productID
   }
- localStorage.setItem ('producto-carrito', JSON.stringify(productoCarrito))
+  arregloProductosCarrito.push(productoCarrito)
+  console.log(arregloProductosCarrito)
+  localStorage.setItem ('producto-carrito', JSON.stringify(arregloProductosCarrito))
+ 
  window.location.href = "cart.html";
 }
 
