@@ -65,8 +65,12 @@ productosCarrito.forEach((productoCarrito, index) => {
 
 });
 
+let contenedorTotalCompra = document.getElementById('total-compra')
+let contenedorTotalArticulos= document.getElementById('cantidad-articulos')
 
+let totalArticulos = totalCarrito()
 
+contenedorTotalArticulos.textContent = totalArticulos > 0 ? totalArticulos: '0'
 
 });
 
