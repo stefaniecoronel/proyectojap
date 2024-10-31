@@ -281,6 +281,7 @@ function agregarCarrito(productName, productDescription, productCurrency, produc
     image: productImage,
     id: productID
   }
+  
   arregloProductosCarrito.push(productoCarrito)
   console.log(arregloProductosCarrito)
   localStorage.setItem ('producto-carrito', JSON.stringify(arregloProductosCarrito))

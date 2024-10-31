@@ -65,3 +65,27 @@ document.getElementById('cerrar-sesion').addEventListener('click', function(){
   localStorage.setItem('datos-usuario', JSON.stringify(datosUsuarioCierreSesion))
   
 })
+
+
+
+function sumarArray(array) {
+  return array.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
+};
+
+function totalCarrito(){
+  let productosCarrito = JSON.parse(localStorage.getItem('producto-carrito'))
+  let cantidades = productosCarrito.map(({ cantidad }) => cantidad);
+  let total = sumarArray(cantidades)
+  return total
+};
+
+
+
+document.addEventListener('DOMContentLoaded', function(){
+let badge = document.getElementById('badge-carrito')
+let cantidadBadge = totalCarrito();
+console.log(cantidadBadge)
+badge.textContent = cantidadBadge > 0 ? cantidadBadge : '';
+});
+
+
