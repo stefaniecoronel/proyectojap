@@ -80,12 +80,22 @@ function totalCarrito(){
 };
 
 
+function totalCosto() {
+  let productosCarrito = JSON.parse(localStorage.getItem('producto-carrito')) || [];
+  let costos = productosCarrito.map(({ cost, cantidad }) => cost * cantidad);
+  let total = sumarArray(costos);
+  return total;
+}
 
 document.addEventListener('DOMContentLoaded', function(){
 let badge = document.getElementById('badge-carrito')
 let cantidadBadge = totalCarrito();
 console.log(cantidadBadge)
 badge.textContent = cantidadBadge > 0 ? cantidadBadge : '';
-});
 
+let totalCompra = totalCosto();
+    console.log(totalCompra); 
+    let contenedorTotalCompra = document.getElementById('total-compra');
+    contenedorTotalCompra.textContent = `${productosCarrito[0]?.currency} ${totalCompra}`
+});
 
