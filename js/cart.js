@@ -44,6 +44,7 @@ if (productosCarrito == undefined){
 
 }
 
+
 productosCarrito.forEach((productoCarrito, index) => {
   let inputCantidad = document.getElementById(`cantidad-${productoCarrito.id}`);
   let subtotalElemento = document.getElementById(`subtotal-${productoCarrito.id}`);
@@ -59,6 +60,8 @@ productosCarrito.forEach((productoCarrito, index) => {
       productosCarrito[index] = { ...productosCarrito[index], cantidad };
 
       localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito));
+
+      updateTotals();
       
  });
  
@@ -75,9 +78,18 @@ contenedorTotalArticulos.textContent = totalArticulos > 0 ? totalArticulos: '0'
 });
 
 
+function updateTotals() {
+  let totalArticulos = 0;
+  let totalCompra = 0;
 
+  productosCarrito.forEach(producto => {
+      totalArticulos += producto.cantidad;
+      totalCompra += producto.cost * producto.cantidad;
+  });
 
-
+  document.getElementById('cantidad-articulos').textContent = totalArticulos > 0 ? totalArticulos : '0';
+  document.getElementById('total-compra').textContent = `${productosCarrito[0]?.currency} ${totalCompra}`;
+}
 
 
 
