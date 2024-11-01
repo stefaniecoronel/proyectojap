@@ -89,9 +89,16 @@ function updateTotals() {
 
   document.getElementById('cantidad-articulos').textContent = totalArticulos > 0 ? totalArticulos : '0';
   document.getElementById('total-compra').textContent = `${productosCarrito[0]?.currency} ${totalCompra}`;
+  updateBadge(totalArticulos);
 }
 
 
+
+
+function updateBadge(totalArticulos) {
+  let badgeElement = document.getElementById('badge-carrito');
+  badgeElement.textContent = totalArticulos > 0 ? totalArticulos : '0';
+}
 
 
 

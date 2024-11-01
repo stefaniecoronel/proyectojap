@@ -281,8 +281,14 @@ function agregarCarrito(productName, productDescription, productCurrency, produc
     image: productImage,
     id: productID
   }
-  
-  arregloProductosCarrito.push(productoCarrito)
+  if (arregloProductosCarrito.some(element => element.id === productoCarrito.id)){
+    arregloProductosCarrito = arregloProductosCarrito.map(element =>
+      element.id === productoCarrito.id
+        ? { ...element, cantidad: element.cantidad + 1 }
+        : element)
+  } else {
+    arregloProductosCarrito.push(productoCarrito)
+  }
   console.log(arregloProductosCarrito)
   localStorage.setItem ('producto-carrito', JSON.stringify(arregloProductosCarrito))
  
