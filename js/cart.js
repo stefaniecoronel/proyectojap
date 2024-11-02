@@ -1,7 +1,7 @@
 let productosCarrito = JSON.parse(localStorage.getItem('producto-carrito'))
 console.log(productosCarrito)
 
-if (productosCarrito){
+if (productosCarrito && productosCarrito.length>0){
   productosCarrito = productosCarrito.map(producto => ({ ...producto, cantidad: producto.cantidad || 1 }));
 }
 
