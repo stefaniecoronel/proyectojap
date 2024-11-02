@@ -141,7 +141,7 @@ function agregarComentario()  {
   contenedorComentariosNuevos.innerHTML = "";
   let comentariosRealizados = JSON.parse(localStorage.getItem('comentarios-realizados'));
   console.log(comentariosRealizados)
-  comentariosRealizados.forEach(element => 
+  if (comentariosRealizados){comentariosRealizados.forEach(element => 
     {if (element.identificador==productoActual){
       contenedorComentariosNuevos.innerHTML +=`
       <a href="#" class="list-group-item list-group-item-action" aria-current="true">
@@ -153,7 +153,8 @@ function agregarComentario()  {
         <small>${element.fecha}</small>
       </a>
       `}}
-  )
+  )}
+  
   };
 
   let contenedorProdRelacionados = document.getElementById('productos-relacionados')
