@@ -49,7 +49,7 @@ function cargarCarrito () {
         <h5 class="card-title">${productoCarrito.name}</h5>
         <h5 class="card-title">${productoCarrito.currency} ${productoCarrito.cost}</h5>
         <input type="number" id="cantidad-${productoCarrito.id}" class="form-control w-25" min="1"  value="${productoCarrito.cantidad}">
-        <p class="card-text">Subtotal: <span id="subtotal-${productoCarrito.id}">${productoCarrito.cost}</span></p>
+        <p class="card-text">Subtotal: ${productoCarrito.currency} <span id="subtotal-${productoCarrito.id}">${productoCarrito.cost}</span></p>
       </div>
     </div>
     </div>
