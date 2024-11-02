@@ -74,7 +74,7 @@ function sumarArray(array) {
 
 function totalCarrito(){
   let productosCarrito = JSON.parse(localStorage.getItem('producto-carrito'))
-  if (productosCarrito) {
+  if (productosCarrito && productosCarrito.length>0) {
     let cantidades = productosCarrito.map(({ cantidad }) => cantidad);
     let total = sumarArray(cantidades)
     return total
