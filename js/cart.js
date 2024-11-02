@@ -1,7 +1,9 @@
 let productosCarrito = JSON.parse(localStorage.getItem('producto-carrito'))
 console.log(productosCarrito)
 
-productosCarrito = productosCarrito.map(producto => ({ ...producto, cantidad: producto.cantidad || 1 }));
+if (productosCarrito){
+  productosCarrito = productosCarrito.map(producto => ({ ...producto, cantidad: producto.cantidad || 1 }));
+}
 
 localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito))
 
@@ -9,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 let contenedorProductosCarrito = document.getElementById('contenedor-productos-carrito')
 
-if (productosCarrito == undefined){
+if (!productosCarrito){
     contenedorProductosCarrito.innerHTML = `
     <div class="alert alert-primary text-center">
     No hay productos en su carrito aún.
@@ -17,8 +19,6 @@ if (productosCarrito == undefined){
 } else {
 
   productosCarrito.forEach((productoCarrito) => { 
-  
-    
     contenedorProductosCarrito.innerHTML += `<div class="justify-content-center d-flex">
     <div class="card">
     <div class="row">
@@ -44,55 +44,82 @@ if (productosCarrito == undefined){
 
 }
 
-
-productosCarrito.forEach((productoCarrito, index) => {
-  let inputCantidad = document.getElementById(`cantidad-${productoCarrito.id}`);
-  let subtotalElemento = document.getElementById(`subtotal-${productoCarrito.id}`);
-
+if (productosCarrito){
+  productosCarrito.forEach((productoCarrito, index) => {
+    let inputCantidad = document.getElementById(`cantidad-${productoCarrito.id}`);
+    let subtotalElemento = document.getElementById(`subtotal-${productoCarrito.id}`);
   
+    
+  
+    // Escucha cambios en el input de cantidad
+    inputCantidad.addEventListener('input', function() {
+        let cantidad = parseInt(inputCantidad.value) || 1; // Asegura que cantidad sea al menos 1
+        let subtotal = productoCarrito.cost * cantidad;
+        subtotalElemento.textContent = subtotal;
+        
+        productosCarrito[index] = { ...productosCarrito[index], cantidad };
+  
+        localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito));
+  
+        updateTotals();
+        
+   });
+   
+  
+  });
+}
 
-  // Escucha cambios en el input de cantidad
-  inputCantidad.addEventListener('input', function() {
-      let cantidad = parseInt(inputCantidad.value) || 1; // Asegura que cantidad sea al menos 1
-      let subtotal = productoCarrito.cost * cantidad;
-      subtotalElemento.textContent = subtotal;
-      
-      productosCarrito[index] = { ...productosCarrito[index], cantidad };
-
-      localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito));
-
-      updateTotals();
-      
- });
- 
-
-});
 
 let contenedorTotalCompra = document.getElementById('total-compra')
 let contenedorTotalArticulos= document.getElementById('cantidad-articulos')
 
 let totalArticulos = totalCarrito()
-
 contenedorTotalArticulos.textContent = totalArticulos > 0 ? totalArticulos: '0'
 
+let totalCompra = totalCosto();
+contenedorTotalCompra.textContent = `UYU ${totalCompra.toLocaleString('es-ES')}`
+
 });
+
+function totalCosto() {
+  let productosCarrito = JSON.parse(localStorage.getItem('producto-carrito')) || [];
+  let costos = productosCarrito.map(({ currency, cost, cantidad }) => ({prodCurrency: currency, totalCost: cost * cantidad}));
+  
+  let costosPesosUy = 0
+  let conversion = parseFloat(localStorage.getItem('conversion'))
+  console.log(conversion)
+
+  if (costos.some(element => element.prodCurrency === 'USD')){
+    costosPesosUy = costos.map((element) => 
+      element.prodCurrency === 'USD'
+      ? (element.totalCost)*conversion
+      : (element.totalCost)
+    )
+  } else {
+    costosPesosUy = costos.map(({ totalCost }) => totalCost)
+  }
+  console.log(costosPesosUy)
+  let total = parseFloat(sumarArray(costosPesosUy).toFixed(2));
+  return total;
+}
 
 
 function updateTotals() {
   let totalArticulos = 0;
   let totalCompra = 0;
 
-  productosCarrito.forEach(producto => {
-      totalArticulos += producto.cantidad;
-      totalCompra += producto.cost * producto.cantidad;
-  });
+  totalArticulos = totalCarrito();
+  totalCompra = totalCosto();
+
+  //productosCarrito.forEach(producto => {
+     // totalArticulos += producto.cantidad;
+      //totalCompra += totalCosto();
+ // });
 
   document.getElementById('cantidad-articulos').textContent = totalArticulos > 0 ? totalArticulos : '0';
-  document.getElementById('total-compra').textContent = `${productosCarrito[0]?.currency} ${totalCompra}`;
+  document.getElementById('total-compra').textContent = `UYU ${totalCompra.toLocaleString('es-ES')}`;
   updateBadge(totalArticulos);
 }
-
-
 
 
 function updateBadge(totalArticulos) {
@@ -101,4 +128,21 @@ function updateBadge(totalArticulos) {
 }
 
 
+
+//Solicitud a API para obtener valor de conversión de dólares a pesos uruguayos dado que en la página tenemos artículos con ambas monedas.
+fetch('https://v6.exchangerate-api.com/v6/63fb12f25259372da4224fab/latest/USD')
+  .then(response => {
+    if (!response.ok) throw new Error('Network response was not ok');
+    return response.json();
+  })
+  .then(data => {
+    let usdToUyu = data.conversion_rates.UYU;
+    console.log(`1 USD = ${usdToUyu} UYU`);
+    localStorage.setItem ('conversion', usdToUyu)
+    
+  })
+  .catch(error => {
+    console.error('Error fetching exchange rate:', error);
+    
+  });
 
