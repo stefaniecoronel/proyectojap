@@ -84,7 +84,7 @@ function actualizarCarrito(){
     
       // Escucha cambios en el input de cantidad
       inputCantidad.addEventListener('input', function() {
-          let cantidad = parseInt(inputCantidad.value) || 1; // Asegura que cantidad sea al menos 1
+          let cantidad = parseInt(inputCantidad.value) 
           let subtotal = productoCarrito.cost * cantidad;
           subtotalElemento.textContent = subtotal;
           
