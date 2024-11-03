@@ -1,19 +1,27 @@
+// Traemos desde el localStorage la información de productos a los que se le hizo click en comprar.
 let productosCarrito = JSON.parse(localStorage.getItem('producto-carrito'))
 console.log(productosCarrito)
 
+//Agregamos la propiedad cantidad a los elementos de productoCarrito si no la tienen con el valor de 1.
+//No tienen esta propiedad cuando se los agrega haciendo click en el botón comprar de product-info. Si ya se encontraban en el carrito si la tienen, por eso se la llama como producto.cantidad.
 if (productosCarrito && productosCarrito.length>0){
   productosCarrito = productosCarrito.map(producto => ({ ...producto, cantidad: producto.cantidad || 1 }));
 }
 
+//Actualizamos en el localStorage los productos del carrito.
 localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito))
 
+//Contenedor del html donde vamos a colocar los elementos del carrito.
 let contenedorProductosCarrito = document.getElementById('contenedor-productos-carrito')
 
 
 document.addEventListener('DOMContentLoaded', function(){
 
+//Al cargarse el contenido de la página, mostramos los elementos del carrito con la función cargarCarrito.
 cargarCarrito ();
 
+//En nuestro carrito decidimos colocar una sección de resumen de compra. Añadimos dinamicamente el total de articulos y el costo total,
+//llamando a las funciones totalCarrito y totalCosto al cargar la página.
 let contenedorTotalCompra = document.getElementById('total-compra')
 let contenedorTotalArticulos= document.getElementById('cantidad-articulos')
 
@@ -26,6 +34,8 @@ contenedorTotalCompra.textContent = `UYU ${totalCompra.toLocaleString('es-ES')}`
 });
 
 function cargarCarrito () {
+  //Si no encuentra al array productosCarrito o es un array vacío (es decir no tenemos nada en el carrito aún),
+  // se muestra un alert dando el mensaje de que nay productos en el acarrito aún.
   let productosCarrito = JSON.parse(localStorage.getItem('producto-carrito'))
   contenedorProductosCarrito.innerHTML = ''
   if (!productosCarrito  || productosCarrito.length === 0){
@@ -34,7 +44,7 @@ function cargarCarrito () {
     No hay productos en su carrito aún.
     </div> `
 } else {
-
+  // En caso contrario, se inserta en el html los artículos que trajimos desde el localStorage mediante el array productosCarrito.
   productosCarrito.forEach((productoCarrito, index) => { 
     contenedorProductosCarrito.innerHTML += `<div class="justify-content-center d-flex">
     <div class="card">
@@ -61,7 +71,7 @@ function cargarCarrito () {
   });
 
 }
-
+//Como parte de la función cargarCarrito también llamamos a actualizarCarrito que es la que responde a eventos de cambio del input cantidad o a que se haga click en el botón para eliminar un artículo.
 actualizarCarrito ();
 
 }
@@ -73,16 +83,17 @@ function actualizarCarrito(){
       let subtotalElemento = document.getElementById(`subtotal-${productoCarrito.id}`);
       let botonEliminar = document.getElementById(`eliminar-${productoCarrito.id}`)
       
-      //Escucha si se da click en el botón eliminar el artículo
+      //Escucha si se da click en el botón eliminar de cada artículo
       botonEliminar.addEventListener('click', function (){
         productosCarrito.splice(index, 1)
         localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito))
+        //Una vez actualizado los artículos en el localStorage, vuelve a cargar los artículos y actualiza los totales del resumen de compra.
         cargarCarrito ();
         updateTotals ();
   
       })
     
-      // Escucha cambios en el input de cantidad
+      // Escucha cambios en el input de cantidad para actualizar el valor del subtotal de cada artículo.
       inputCantidad.addEventListener('input', function() {
           let cantidad = parseInt(inputCantidad.value) 
           let subtotal = productoCarrito.cost * cantidad;
@@ -91,7 +102,7 @@ function actualizarCarrito(){
           productosCarrito[index] = { ...productosCarrito[index], cantidad };
     
           localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito));
-    
+          // Llama a esta función para actualizar los valores del resumen de compra. 
           updateTotals();
           
      });
@@ -102,6 +113,8 @@ function actualizarCarrito(){
 
 }
 
+//Esta función crea un array de objetos que tienen la moneda del artículos y el costo total considerando la cantidad de ellos que se colocaron en el carrito.
+//Luego suma los totales considerando si hay alguno en dolares. En este caso lo convierte en pesos trayendo desde el localStorage la cotización del dolar. Está cotización se guarda allí luego de haber hecho una solicitud a una API de conversiones de monedas.
 function totalCosto() {
   let productosCarrito = JSON.parse(localStorage.getItem('producto-carrito')) || [];
   let costos = productosCarrito.map(({ currency, cost, cantidad }) => ({prodCurrency: currency, totalCost: cost * cantidad}));
@@ -124,7 +137,8 @@ function totalCosto() {
   return total;
 }
 
-
+//Esta función actualiza los totales en el resumen de compra llamando a las funciones totalCarrito y totalCosto.
+// Luego llama a updateBadge para actualizar la cantidad de artículos en el badge de Mi Carrito.
 function updateTotals() {
   let totalArticulos = 0;
   let totalCompra = 0;
@@ -137,7 +151,7 @@ function updateTotals() {
   updateBadge(totalArticulos);
 }
 
-
+//Esta función inserta en el badge la cantidad que se le ingrese como parámetro.
 function updateBadge(totalArticulos) {
   let badgeElement = document.getElementById('badge-carrito');
   badgeElement.textContent = totalArticulos > 0 ? totalArticulos : '0';

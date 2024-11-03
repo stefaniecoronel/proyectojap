@@ -267,12 +267,13 @@ function setProductID(id) {
   window.location = "product-info.html"
 }
 
-//Al hacer click en el botón comprar, se ejecuta esta función que guarda los datos del producto en el localStorage y redirige a la página del carrito. 
+//Al hacer click en el botón comprar, se ejecuta esta función (mediante un atributo onclick) que guarda los datos del producto en el localStorage y redirige a la página del carrito. 
 function agregarCarrito(productName, productDescription, productCurrency, productCost, productSoldCount, productImage, productID) {
   
+  //Traemos el arreglo de productos en el carrito desde el localStorge y si no existe lo inicializamos como vacío.
   let arregloProductosCarrito = JSON.parse(localStorage.getItem('producto-carrito')) || [];
   console.log(arregloProductosCarrito)
-
+ //Creamos un objeto donde guardaremos cada uno de los datos relevantes del producto al que se le hizo click en comprar.
   let productoCarrito = { 
     name: productName , 
     description:productDescription , 
@@ -282,17 +283,19 @@ function agregarCarrito(productName, productDescription, productCurrency, produc
     image: productImage,
     id: productID
   }
+  //Antes de guardarlo en nuestro arreglo de productos, nos fijamos si ya se encuentra en el arreglo mediante el atributo id.
   if (arregloProductosCarrito.some(element => element.id === productoCarrito.id)){
     arregloProductosCarrito = arregloProductosCarrito.map(element =>
       element.id === productoCarrito.id
-        ? { ...element, cantidad: element.cantidad + 1 }
+        ? { ...element, cantidad: element.cantidad + 1 } //Si ya se encuentra, aumentamos su cantidad en uno.
         : element)
   } else {
-    arregloProductosCarrito.push(productoCarrito)
+    arregloProductosCarrito.push(productoCarrito) //Si no se encuentra, lo agregamos.
   }
   console.log(arregloProductosCarrito)
+  //Actualizamos el localStorage guardando el nuevo array de productos.
   localStorage.setItem ('producto-carrito', JSON.stringify(arregloProductosCarrito))
- 
+ //Redirigimos a la página del carrito. 
  window.location.href = "cart.html";
 }
 
