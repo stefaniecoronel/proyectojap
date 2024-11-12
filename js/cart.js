@@ -176,3 +176,27 @@ fetch('https://v6.exchangerate-api.com/v6/63fb12f25259372da4224fab/latest/USD')
     
   });
 
+let tipoEnvio = document.getElementById('tipo-envio')
+
+tipoEnvio.addEventListener('change', function(event){
+let envioSeleccionado = event.target.value
+let contenedorCostoEnvio = document.getElementById('costo-envio')
+let contenedorCostoTotal = document.getElementById('total-compra-envio')
+let subtotal = totalCosto();
+if (envioSeleccionado==15){
+  let costoEnvio = parseFloat((subtotal*0.15).toFixed(2))
+  let costoTotal = parseFloat((parseFloat(costoEnvio) + subtotal).toFixed(2))
+  contenedorCostoEnvio.textContent = `UYU ${costoEnvio.toLocaleString('es-ES')}`
+  contenedorCostoTotal.textContent = `UYU ${costoTotal.toLocaleString('es-ES')}`
+} else if (envioSeleccionado==7){
+  let costoEnvio = parseFloat((subtotal*0.07).toFixed(2))
+  let costoTotal =  parseFloat((parseFloat(costoEnvio) + subtotal).toFixed(2))
+  contenedorCostoEnvio.textContent = `UYU ${costoEnvio.toLocaleString('es-ES')}`
+  contenedorCostoTotal.textContent = `UYU ${costoTotal.toLocaleString('es-ES')}`
+} else if (envioSeleccionado==5){
+  let costoEnvio = parseFloat((subtotal*0.05).toFixed(2))
+  let costoTotal = parseFloat((parseFloat(costoEnvio) + subtotal).toFixed(2))
+  contenedorCostoEnvio.textContent = `UYU ${costoEnvio.toLocaleString('es-ES')}`
+  contenedorCostoTotal.textContent = `UYU ${costoTotal.toLocaleString('es-ES')}`
+}
+});

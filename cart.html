@@ -55,10 +55,18 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Resumen de compra</h5>
-              <p class="card-text">Cantidad de artículos:</p>
-              <p id="cantidad-articulos"></p>
-              <p>Total:</p>
-              <p id="total-compra"></p>
+              <div class="form-group mt-3">
+                <select class="form-select" id="tipo-envio">
+                  <option selected disabled>Seleccionar tipo de envío</option>
+                  <option value="15">Premium 2 a 5 días (15%)</option>
+                  <option value="7">Express 5 a 8 días (7%)</option>
+                  <option value="5">Standard 12 a 15 días (5%)</option>
+                </select>
+              </div>
+              <p class="card-text">Cantidad de artículos: <span id="cantidad-articulos"></span></p>
+              <p>Subtotal: <span id="total-compra"></span></p>
+              <p>Costo de envío: <span id="costo-envio"></span></p>
+              <p>Total: <span id="total-compra-envio"></span></p>
               <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalFinalizarCompra">Finalizar compra</button>            </div>
           </div>
         </div>
@@ -82,32 +90,15 @@
           <!-- Pestañas para organizar la información -->
           <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <a class="nav-link active" id="envio-tab" data-bs-toggle="tab" href="#envio" role="tab" aria-controls="envio" aria-selected="true">Tipo de Envío</a>
-            </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" id="direccion-tab" data-bs-toggle="tab" href="#direccion" role="tab" aria-controls="direccion" aria-selected="false">Dirección</a>
+              <a class="nav-link active" id="direccion-tab" data-bs-toggle="tab" href="#direccion" role="tab" aria-controls="direccion" aria-selected="true">Dirección</a>
             </li>
             <li class="nav-item" role="presentation">
               <a class="nav-link" id="pago-tab" data-bs-toggle="tab" href="#pago" role="tab" aria-controls="pago" aria-selected="false">Forma de Pago</a>
             </li>
-            <li class="nav-item" role="presentation">
-              <a class="nav-link" id="costos-tab" data-bs-toggle="tab" href="#costos" role="tab" aria-controls="costos" aria-selected="false">Costos</a>
-            </li>
           </ul>
           <div class="tab-content" id="myTabContent">
-            <!-- Tipo de Envío -->
-            <div class="tab-pane fade show active" id="envio" role="tabpanel" aria-labelledby="envio-tab">
-              <div class="form-group mt-3">
-                <label for="tipo-envio">Selecciona el tipo de envío:</label>
-                <select class="form-select" id="tipo-envio">
-                  <option value="15">Premium 2 a 5 días (15%)</option>
-                  <option value="7">Express 5 a 8 días (7%)</option>
-                  <option value="5">Standard 12 a 15 días (5%)</option>
-                </select>
-              </div>
-            </div>
             <!-- Dirección de Envío -->
-            <div class="tab-pane fade" id="direccion" role="tabpanel" aria-labelledby="direccion-tab">
+            <div class="tab-pane fade show active" id="direccion" role="tabpanel" aria-labelledby="direccion-tab">
               <div class="form-group mt-3">
                 <label for="departamento">Departamento:</label>
                 <input type="text" class="form-control" id="departamento" placeholder="Departamento">
@@ -138,13 +129,6 @@
                   <option value="transferencia">Transferencia bancaria</option>
                 </select>
               </div>
-            </div>
-            <!-- Costos -->
-            <div class="tab-pane fade" id="costos" role="tabpanel" aria-labelledby="costos-tab">
-              <h5>Resumen de costos</h5>
-              <p>Subtotal: <span id="subtotal-costo"></span></p>
-              <p>Costo de envío: <span id="costo-envio"></span></p>
-              <p>Total: <span id="total-costo"></span></p>
             </div>
           </div>
         </div>
