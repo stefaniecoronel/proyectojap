@@ -206,3 +206,18 @@ if (envioSeleccionado==15){
   contenedorCostoTotal.textContent = `UYU ${costoTotal.toLocaleString('es-ES')}`
 }
  }
+
+ let formaPago = document.getElementById('forma-pago')
+ let formularioTarjeta = document.getElementById('formulario-tarjeta')
+ let infoTransferencia = document.getElementById('transferencia')
+ formaPago.addEventListener('change', function(){
+  
+  infoTransferencia.style.display = 'none';
+  formularioTarjeta.style.display = 'none';
+
+  if (formaPago.value==="tarjeta"){
+    formularioTarjeta.style.display = 'block'; 
+  } else if (formaPago.value==="transferencia"){
+    infoTransferencia.style.display = 'block';
+  }
+ });
