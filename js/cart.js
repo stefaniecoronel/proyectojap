@@ -90,6 +90,8 @@ function actualizarCarrito(){
         //Una vez actualizado los artículos en el localStorage, vuelve a cargar los artículos y actualiza los totales del resumen de compra.
         cargarCarrito ();
         updateTotals ();
+        let envioSeleccionado = document.getElementById('tipo-envio').value
+        costoEnvioyTotal(envioSeleccionado);
   
       })
     
@@ -180,6 +182,10 @@ let tipoEnvio = document.getElementById('tipo-envio')
 
 tipoEnvio.addEventListener('change', function(event){
 let envioSeleccionado = event.target.value
+costoEnvioyTotal (envioSeleccionado)
+});
+
+function costoEnvioyTotal (envioSeleccionado) {
 let contenedorCostoEnvio = document.getElementById('costo-envio')
 let contenedorCostoTotal = document.getElementById('total-compra-envio')
 let subtotal = totalCosto();
@@ -199,4 +205,4 @@ if (envioSeleccionado==15){
   contenedorCostoEnvio.textContent = `UYU ${costoEnvio.toLocaleString('es-ES')}`
   contenedorCostoTotal.textContent = `UYU ${costoTotal.toLocaleString('es-ES')}`
 }
-});
+ }
