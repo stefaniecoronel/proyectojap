@@ -92,6 +92,7 @@ function actualizarCarrito(){
         updateTotals ();
         let envioSeleccionado = document.getElementById('tipo-envio').value
         costoEnvioyTotal(envioSeleccionado);
+        mensajeCompra.innerHTML = "";
   
       })
     
@@ -106,6 +107,7 @@ function actualizarCarrito(){
           localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito));
           // Llama a esta función para actualizar los valores del resumen de compra. 
           updateTotals();
+          mensajeCompra.innerHTML = "";
           
      });
      
@@ -183,6 +185,7 @@ let tipoEnvio = document.getElementById('tipo-envio')
 tipoEnvio.addEventListener('change', function(event){
 let envioSeleccionado = event.target.value
 costoEnvioyTotal (envioSeleccionado)
+mensajeCompra.innerHTML = ""
 });
 
 function costoEnvioyTotal (envioSeleccionado) {
@@ -221,3 +224,89 @@ if (envioSeleccionado==15){
     infoTransferencia.style.display = 'block';
   }
  });
+
+ let departamento = ""
+ let localidad = ""
+ let calle = ""
+ let numero = ""
+ let esquina = ""
+ let numeroTarjeta = ""
+ let fecha = ""
+ let codigo = ""
+ let nombre = ""
+ let apellido = ""
+ let formaPagoSeleccionada = ""
+
+ let guardarDatos = document.getElementById('guardar-datos')
+ let infoDepartamento = document.getElementById('departamento')
+ let infoLocalidad = document.getElementById('localidad')
+ let infoCalle = document.getElementById('calle')
+ let infoNumero = document.getElementById('numero')
+ let infoEsquina = document.getElementById('esquina')
+ let infoNumeroTarjeta = document.getElementById('numero-tarjeta')
+ let infoFechaTarjeta = document.getElementById('fecha-tarjeta')
+ let infoCodigo = document.getElementById('codigo-tarjeta')
+ let infoNombre = document.getElementById('nombre-tarjeta')
+ let infoApellido = document.getElementById('apellido-tarjeta')
+ 
+ guardarDatos.addEventListener('click', function(){
+
+  departamento = infoDepartamento.value
+  localidad = infoLocalidad.value
+  calle = infoCalle.value
+  numero = infoNumero.value
+  esquina = infoEsquina.value
+
+  formaPagoSeleccionada = formaPago.value
+
+  if (formaPago.value==="tarjeta"){
+    numeroTarjeta = infoNumeroTarjeta.value
+    fecha = infoFechaTarjeta.value
+    codigo = infoCodigo.value
+    nombre = infoNombre.value
+    apellido = infoApellido.value
+  }
+
+ });
+
+ let finalizarCompra = document.getElementById('finalizar-compra')
+ let mensajeCompra = document.getElementById('mensaje-compra')
+
+ finalizarCompra.addEventListener('click', function (){
+      mensajeCompra.innerHTML = ""
+    if (!productosCarrito  || productosCarrito.length === 0){
+      contenedorProductosCarrito.innerHTML = ""
+      mensajeCompra.innerHTML = `<div class="alert alert-warning alert-overlay text-center" role="alert">
+        No se puede finalizar la compra porque no hay productos en su carrito.
+        </div>`
+    } else if (tipoEnvio.value===""){
+      mensajeCompra.innerHTML = `<div class="alert alert-warning alert-overlay text-center" role="alert">
+      Seleccione un tipo de envío.
+      </div>`
+    } else if (formaPago.value===""){
+      mensajeCompra.innerHTML = `<div class="alert alert-warning alert-overlay text-center" role="alert">
+      Seleccione forma de pago.
+      </div>`
+    } else if (formaPago.value==="tarjeta"&&(numeroTarjeta===""||fecha===""||codigo===""||nomber===""||apellido==="")){
+      mensajeCompra.innerHTML = `<div class="alert alert-warning alert-overlay text-center" role="alert">
+      Complete los datos de la tarjeta.
+      </div>`
+    } else if (departamento==="" || localidad==="" || calle==="" || numero==="" || esquina===""){
+      mensajeCompra.innerHTML = `<div class="alert alert-warning alert-overlay text-center" role="alert">
+      Complete los datos de direccion de envío.
+      </div>`
+    } else {
+      mensajeCompra.innerHTML = `<div class="alert alert-success alert-overlay text-center" role="alert">
+      ¡Compra finalizada con éxito!
+      </div>`
+    }
+ });
+
+
+let openModal =  document.getElementById('pago-direccion')
+
+openModal.addEventListener('click', function(){
+mensajeCompra.innerHTML = ""
+});
+
+

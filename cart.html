@@ -57,7 +57,7 @@
               <h5 class="card-title">Resumen de compra</h5>
               <div class="form-group mt-3">
                 <select class="form-select" id="tipo-envio">
-                  <option selected disabled>Seleccionar tipo de envío</option>
+                  <option selected disabled value="">Seleccionar tipo de envío</option>
                   <option value="15">Premium 2 a 5 días (15%)</option>
                   <option value="7">Express 5 a 8 días (7%)</option>
                   <option value="5">Standard 12 a 15 días (5%)</option>
@@ -68,7 +68,8 @@
               <p>Costo de envío: <span id="costo-envio"></span></p>
               <p>Total: <span id="total-compra-envio"></span></p>
               <a href="#" id="pago-direccion" data-bs-toggle="modal" data-bs-target="#modalDireccionPago">Añadir dirección y forma de pago</a>
-              <button class="btn btn-primary" id="finalizar-compra" data-bs-toggle="modal" data-bs-target="#modalDireccionPago">Finalizar compra</button>            
+              <button class="btn btn-primary" id="finalizar-compra">Finalizar compra</button> 
+              <div id="mensaje-compra"></div>           
             </div>
           </div>
         </div>
@@ -103,30 +104,30 @@
             <div class="tab-pane fade show active" id="direccion" role="tabpanel" aria-labelledby="direccion-tab">
               <div class="form-group mt-3">
                 <label for="departamento">Departamento:</label>
-                <input type="text" class="form-control" id="departamento" placeholder="Departamento">
+                <input type="text" class="form-control" id="departamento">
               </div>
               <div class="form-group mt-3">
                 <label for="localidad">Localidad:</label>
-                <input type="text" class="form-control" id="localidad" placeholder="Localidad">
+                <input type="text" class="form-control" id="localidad">
               </div>
               <div class="form-group mt-3">
                 <label for="calle">Calle:</label>
-                <input type="text" class="form-control" id="calle" placeholder="Calle">
+                <input type="text" class="form-control" id="calle">
               </div>
               <div class="form-group mt-3">
                 <label for="numero">Número:</label>
-                <input type="text" class="form-control" id="numero" placeholder="Número">
+                <input type="text" class="form-control" id="numero">
               </div>
               <div class="form-group mt-3">
                 <label for="esquina">Esquina:</label>
-                <input type="text" class="form-control" id="esquina" placeholder="Esquina">
+                <input type="text" class="form-control" id="esquina">
               </div>
             </div>
             <!-- Forma de Pago -->
             <div class="tab-pane fade" id="pago" role="tabpanel" aria-labelledby="pago-tab">
               <div class="form-group mt-3">
                 <select class="form-select" id="forma-pago">
-                  <option selected disabled>Seleccionar forma de pago</option>
+                  <option selected disabled value="">Seleccionar forma de pago</option>
                   <option value="tarjeta">Tarjeta de crédito o débito</option>
                   <option value="transferencia">Transferencia bancaria</option>
                 </select>
@@ -154,7 +155,7 @@
                   </div>
                 </form>
                 <div style="display: none;" id="transferencia">
-                  <p>Realizar transferencia a caja de ahorro Itaú 7832323</p>
+                  <p>Realizar transferencia a cuenta Itaú 7832323</p>
                   <p>Enviar comprobante de transferencia a emercado@jap.com.uy</p>
                 </div>
               </div>
@@ -163,7 +164,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Guardar Datos</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="guardar-datos">Guardar Datos</button>
         </div>
       </div>
     </div>
