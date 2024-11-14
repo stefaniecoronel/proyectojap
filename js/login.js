@@ -12,12 +12,7 @@ document.addEventListener ('submit',function(event){
        
  
     }
-
-    
-
 } )
-
-
 
 function checkSession() {
     const session = localStorage.getItem('session');
@@ -30,5 +25,3 @@ function checkSession() {
             window.location.href = 'login.html'; // Redirige después de un breve retraso   
 }
 }
-
-

@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 //Al hacer click en el botón enviar del formulario se evalua si hay contenido en el textarea o 
 //alguna estrella seleccionada. Si algo de esto ocurre se guarda el comentario en el localStorage.
+
 document.getElementById("enviar-comentario").addEventListener('click', function(){
   let comentarioNuevo = document.getElementById('comentario-nuevo').value
   let ratings = document.getElementsByName('rating') 
@@ -37,6 +38,7 @@ document.getElementById("enviar-comentario").addEventListener('click', function(
           break; 
       }
     }
+
     //Se define un objeto con todos los datos del comentario.
     let review = {identificador:producto, usuario:nombreUsuario, comentario:comentarioNuevo, rating:userRating, fecha:fechaComentario}
     let comentariosRealizados;
@@ -52,17 +54,15 @@ document.getElementById("enviar-comentario").addEventListener('click', function(
     comentariosRealizados.push(review) //Se agrega el comentario realizado al array de comentarios.
     //Se guarda el array de comentarios luego de convertirlo a formato JSON en el local storage.
     localStorage.setItem('comentarios-realizados', JSON.stringify(comentariosRealizados))
-    
+
+    }
+    else { 
+      alert ("Debe ingresar un comentario o calificación.")
+    }
   
-   
-  }
-  else { 
-    alert ("Debe ingresar un comentario o calificación.")
-  }
-  
-});
-agregarComentario();
-});
+  });
+    agregarComentario();
+  });
 
 let contenedorInfo = document.getElementById("info");
 let imagenes = document.getElementById("imagenes");
@@ -146,7 +146,6 @@ function agregarComentario()  {
       </a>
       `}}
   )}
-  
   };
 
   let contenedorProdRelacionados = document.getElementById('productos-relacionados')

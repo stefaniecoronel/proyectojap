@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function(){
         document.getElementById('email').value =  datosUsuarioGuardados.email
         document.getElementById('phone').value =  datosUsuarioGuardados.telefono
         document.getElementById('profileImage').src = datosUsuarioGuardados.fotoPerfil
-        
     }
     
     profileForm.addEventListener('submit', function(event){
@@ -58,14 +57,11 @@ document.addEventListener('DOMContentLoaded', function(){
         else {
             localStorage.setItem('nightMode', 'disabled');
         }
-
-        
         });
 
   //Se completa el  campo de usuario de my-profile con el usuario utilizado al iniciar sesión.  
   let username = localStorage.getItem('nombre')
   document.getElementById('username').value = username
-
 
   //Mostrar imagen de perfil subida y guardarla en el localStorage.
   let imageURL = ""
@@ -82,5 +78,3 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     });
 });
-
-
