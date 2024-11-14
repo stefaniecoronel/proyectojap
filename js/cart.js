@@ -107,6 +107,8 @@ function actualizarCarrito(){
           localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito));
           // Llama a esta función para actualizar los valores del resumen de compra. 
           updateTotals();
+          let envioSeleccionado = document.getElementById('tipo-envio').value
+          costoEnvioyTotal(envioSeleccionado);
           mensajeCompra.innerHTML = "";
           
      });
@@ -293,7 +295,7 @@ if (envioSeleccionado==15){
       </div>`
     } else if (departamento==="" || localidad==="" || calle==="" || numero==="" || esquina===""){
       mensajeCompra.innerHTML = `<div class="alert alert-warning alert-overlay text-center" role="alert">
-      Complete los datos de direccion de envío.
+      Complete los datos de dirección de envío.
       </div>`
     } else {
       mensajeCompra.innerHTML = `<div class="alert alert-success alert-overlay text-center" role="alert">
