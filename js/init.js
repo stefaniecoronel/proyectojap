@@ -96,3 +96,13 @@ badge.textContent = cantidadBadge > 0 ? cantidadBadge : '';
 
 });
 
+document.addEventListener('DOMContentLoaded', function(){
+  let displayMode = localStorage.getItem('nightMode')
+  if (displayMode=="enabled"){
+  document.documentElement.setAttribute('data-bs-theme','dark') //agrego el atributo de bootstrap correspondiente a dark theme a todo el html
+  }
+  else {
+   document.documentElement.setAttribute('data-bs-theme','light') //agrego el atributo de bootstrap correspondiente a light theme a todo el html
+ }
+
+});
