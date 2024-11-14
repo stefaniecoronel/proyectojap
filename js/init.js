@@ -46,10 +46,7 @@ document.addEventListener ('DOMContentLoaded', function (){
   const session = localStorage.getItem('session');
   if (session === 'active'){
       contenedorUsuario.innerHTML += usuarioInicio;
-    
-
   }
-
 })
 
 //Cuando se cierra sesión se borran los datos de usuario.
@@ -62,11 +59,8 @@ document.getElementById('cerrar-sesion').addEventListener('click', function(){
     telefono: "" ,
     fotoPerfil: "https://via.placeholder.com/150"
 }
-  localStorage.setItem('datos-usuario', JSON.stringify(datosUsuarioCierreSesion))
-  
+  localStorage.setItem('datos-usuario', JSON.stringify(datosUsuarioCierreSesion)) 
 })
-
-
 
 function sumarArray(array) {
   return array.reduce((acumulador, valorActual) => acumulador + valorActual, 0);
@@ -84,8 +78,6 @@ function totalCarrito(){
   
 };
 
-
-
 // Este fragmento de código es utilizado para insertar en el badge la cantidad correspondiente de artículos en el carrito.
 //El badge está en el dropdown de la nav-bar que vemos en casi todas las páginas del sitio. Por eso colocamos este código en el js init, que se encuentra asociado a cada una de ellas. 
 document.addEventListener('DOMContentLoaded', function(){
@@ -93,6 +85,4 @@ let badge = document.getElementById('badge-carrito')
 let cantidadBadge = totalCarrito();
 badge.textContent = cantidadBadge > 0 ? cantidadBadge : '';
 
-
 });
-
