@@ -184,12 +184,16 @@ fetch('https://v6.exchangerate-api.com/v6/63fb12f25259372da4224fab/latest/USD')
 
 let tipoEnvio = document.getElementById('tipo-envio')
 
+
+//Al seleccionar un tipo de envio se realizan y muestran los montos de costo de envio y total.
 tipoEnvio.addEventListener('change', function(event){
 let envioSeleccionado = event.target.value
 costoEnvioyTotal (envioSeleccionado)
 mensajeCompra.innerHTML = ""
 });
 
+
+//Función que se fija que tipo de envio se seleccionó, calcula el costo de envio y total y los muestra en el resumen de compra. 
 function costoEnvioyTotal (envioSeleccionado) {
 let contenedorCostoEnvio = document.getElementById('costo-envio')
 let contenedorCostoTotal = document.getElementById('total-compra-envio')
@@ -212,9 +216,12 @@ if (envioSeleccionado==15){
 }
  }
 
+
  let formaPago = document.getElementById('forma-pago')
  let formularioTarjeta = document.getElementById('formulario-tarjeta')
  let infoTransferencia = document.getElementById('transferencia')
+
+ //Según la forma de pago seleccionada la información que se muestra: formulario para tarjeta o info para la transferencia.
  formaPago.addEventListener('change', function(){
   
   infoTransferencia.style.display = 'none';
@@ -227,6 +234,8 @@ if (envioSeleccionado==15){
   }
  });
 
+
+//Se inicializan las variables donde se guardará la información que el usuario complete.
  let departamento = ""
  let localidad = ""
  let calle = ""
@@ -239,6 +248,7 @@ if (envioSeleccionado==15){
  let apellido = ""
  let formaPagoSeleccionada = ""
 
+//Se traen los distintos campos que el usuario llenará.
  let guardarDatos = document.getElementById('guardar-datos')
  let infoDepartamento = document.getElementById('departamento')
  let infoLocalidad = document.getElementById('localidad')
@@ -251,6 +261,7 @@ if (envioSeleccionado==15){
  let infoNombre = document.getElementById('nombre-tarjeta')
  let infoApellido = document.getElementById('apellido-tarjeta')
  
+ //Al hacer click en el botón de guardar datos, lo que el usuario escribió o seleccionó en los campos del modal se guarda en las variables inicializadas previamente.
  guardarDatos.addEventListener('click', function(){
 
   departamento = infoDepartamento.value
@@ -274,6 +285,7 @@ if (envioSeleccionado==15){
  let finalizarCompra = document.getElementById('finalizar-compra')
  let mensajeCompra = document.getElementById('mensaje-compra')
 
+//Al hacer click en finalizar compra se chequea que el carrito tenga artículos, que se haya seleccionado tipo de envío, forma de pago e info asociada si corresponde y direccion de envío. Se muestra un mensaje indicativo de lo que falta si es que falta algo al momento de hacer click, en caso contrario se muestra un mensaje de compra exitosa.
  finalizarCompra.addEventListener('click', function (){
       mensajeCompra.innerHTML = ""
     if (!productosCarrito  || productosCarrito.length === 0){
