@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     }
   })
+  
   //Agrego la funcionalidad de ordenar de forma ascendente al correspondiente botón.
   document.getElementById("sortAsc").addEventListener("click", function(){
     ordenarYCargarArticulos(ORDER_ASC_BY_PRICE);
