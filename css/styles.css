@@ -41,10 +41,14 @@ nav a {
   font-weight: bold;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 995px) {
   .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    background: url('../img/cover_back chica.png');
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-color: #f6f7f8;
+    height: 25vh;
   }
 }
 
