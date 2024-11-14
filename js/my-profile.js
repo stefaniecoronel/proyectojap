@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function(){
         else {
             localStorage.setItem('nightMode', 'disabled');
         }
+        window.location.href = "my-profile.html";
         });
 
   //Se completa el  campo de usuario de my-profile con el usuario utilizado al iniciar sesión.  
