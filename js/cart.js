@@ -301,9 +301,9 @@ if (envioSeleccionado==15){
       mensajeCompra.innerHTML = `<div class="alert alert-warning alert-overlay text-center" role="alert">
       Seleccione forma de pago.
       </div>`
-    } else if (formaPago.value==="tarjeta"&&(numeroTarjeta===""||fecha===""||codigo===""||nomber===""||apellido==="")){
+    } else if (formaPago.value==="tarjeta"&&(numeroTarjeta===""||(numeroTarjeta.length!=16)||(codigo.length!=3)|| fecha===""||codigo===""||nombre===""||apellido==="")){
       mensajeCompra.innerHTML = `<div class="alert alert-warning alert-overlay text-center" role="alert">
-      Complete los datos de la tarjeta.
+      Complete los datos de la tarjeta o revise que sean correctos.
       </div>`
     } else if (departamento==="" || localidad==="" || calle==="" || numero==="" || esquina===""){
       mensajeCompra.innerHTML = `<div class="alert alert-warning alert-overlay text-center" role="alert">
