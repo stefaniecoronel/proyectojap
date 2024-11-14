@@ -87,6 +87,8 @@ badge.textContent = cantidadBadge > 0 ? cantidadBadge : '';
 
 });
 
+
+//Cada vez que se carga una página se chequea si el modo noche está activado para colocar el atributo correspondiente si es el caso.
 document.addEventListener('DOMContentLoaded', function(){
   let displayMode = localStorage.getItem('nightMode')
   if (displayMode=="enabled"){
