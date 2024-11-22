@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function(){
   let catID = localStorage.getItem("catID")
   console.log (catID)
-  let direccion = PRODUCTS_URL
+  let direccion = `${PRODUCTS_URL}${catID}`
   //Cargo en la página los artículos a través del JSON.
   getJSONData(direccion).then(function(respObj){
     if(respObj.status == "ok"){

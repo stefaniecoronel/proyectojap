@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function(){
     let productID = localStorage.getItem("productID")
     console.log (productID)
-    let direccion = PRODUCT_INFO_URL
-    let comentariosURL = PRODUCT_INFO_COMMENTS_URL
+    let direccion = `${PRODUCT_INFO_URL}${productID}`
+    let comentariosURL = `${PRODUCT_INFO_COMMENTS_URL}${productID}`
     getJSONData(direccion).then(function(respObj){
     if(respObj.status == "ok"){
         console.log(respObj.data)
