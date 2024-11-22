@@ -7,10 +7,40 @@ document.addEventListener ('submit',function(event){
     
         localStorage.setItem('session', 'active');
         localStorage.setItem('nombre', usuario);
-        window.location.href="index.html"; 
         localStorage.setItem('nightMode', 'disabled'); //por defecto dejamos el modo noche desactivado     
-       
- 
+
+        //Solicitud POST para generar TOKEN.
+        let username = usuario;
+        let password = contraseña;
+
+        fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); 
+                } else {
+                    return response.json().then(error => {
+                        throw new Error(error.error || 'Error al iniciar sesión');
+                    });
+                }
+            })
+            .then(data => {
+                alert('Login exitoso.');
+
+                // Redirigir al usuario
+                window.location.href = "index.html";
+            })
+            .catch(err => {
+                console.error('Error al enviar la solicitud:', err);
+                alert('Ocurrió un error: ' + err.message);
+            });
+        
+        
     }
 } )
 
