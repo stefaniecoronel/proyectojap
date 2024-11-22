@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function(){
     let productID = localStorage.getItem("productID")
     console.log (productID)
-    let direccion =`https://japceibal.github.io/emercado-api/products/${productID}.json`
-    let comentariosURL =`https://japceibal.github.io/emercado-api/products_comments/${productID}.json`
+    let direccion = `${PRODUCT_INFO_URL}${productID}`
+    let comentariosURL = `${PRODUCT_INFO_COMMENTS_URL}${productID}`
     getJSONData(direccion).then(function(respObj){
     if(respObj.status == "ok"){
         console.log(respObj.data)
