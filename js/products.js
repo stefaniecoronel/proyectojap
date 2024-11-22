@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function(){
   let catID = localStorage.getItem("catID")
   console.log (catID)
-  let direccion =`https://japceibal.github.io/emercado-api/cats_products/${catID}.json`
+  let direccion = PRODUCTS_URL
   //Cargo en la página los artículos a través del JSON.
   getJSONData(direccion).then(function(respObj){
     if(respObj.status == "ok"){
