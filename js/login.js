@@ -31,8 +31,8 @@ document.addEventListener ('submit',function(event){
             })
             .then(data => {
                 alert('Login exitoso.');
-
                 // Redirigir al usuario
+                localStorage.setItem('token', data.token)
                 window.location.href = "index.html";
             })
             .catch(err => {
