@@ -77,13 +77,14 @@ actualizarCarrito ();
 }
 
 function actualizarCarrito(){
-  if (productosCarrito){
+  if (productosCarrito && productosCarrito.length>0){
     productosCarrito.forEach((productoCarrito, index) => {
       let inputCantidad = document.getElementById(`cantidad-${productoCarrito.id}`);
       let subtotalElemento = document.getElementById(`subtotal-${productoCarrito.id}`);
       let botonEliminar = document.getElementById(`eliminar-${productoCarrito.id}`)
       
-      //Escucha si se da click en el botón eliminar de cada artículo
+      if (botonEliminar){
+          //Escucha si se da click en el botón eliminar de cada artículo
       botonEliminar.addEventListener('click', function (){
         productosCarrito.splice(index, 1)
         localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito))
@@ -95,23 +96,27 @@ function actualizarCarrito(){
         mensajeCompra.innerHTML = "";
   
       })
-    
-      // Escucha cambios en el input de cantidad para actualizar el valor del subtotal de cada artículo.
+      }
+      
+     if(inputCantidad){
+         // Escucha cambios en el input de cantidad para actualizar el valor del subtotal de cada artículo.
       inputCantidad.addEventListener('input', function() {
-          let cantidad = parseInt(inputCantidad.value) 
-          let subtotal = productoCarrito.cost * cantidad;
-          subtotalElemento.textContent = subtotal;
-          
-          productosCarrito[index] = { ...productosCarrito[index], cantidad };
-    
-          localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito));
-          // Llama a esta función para actualizar los valores del resumen de compra. 
-          updateTotals();
-          let envioSeleccionado = document.getElementById('tipo-envio').value
-          costoEnvioyTotal(envioSeleccionado);
-          mensajeCompra.innerHTML = "";
-          
-     });
+        let cantidad = parseInt(inputCantidad.value) 
+        let subtotal = productoCarrito.cost * cantidad;
+        subtotalElemento.textContent = subtotal;
+        
+        productosCarrito[index] = { ...productosCarrito[index], cantidad };
+  
+        localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito));
+        // Llama a esta función para actualizar los valores del resumen de compra. 
+        updateTotals();
+        let envioSeleccionado = document.getElementById('tipo-envio').value
+        costoEnvioyTotal(envioSeleccionado);
+        mensajeCompra.innerHTML = "";
+        
+   });
+     }
+     
      
     
     });
@@ -314,6 +319,7 @@ if (envioSeleccionado==15){
       ¡Compra finalizada con éxito!
       </div>`
       registrarCompra();
+      vaciarCarrito();
     }
  });
 
@@ -360,3 +366,12 @@ function registrarCompra(){
 
 };
 
+function vaciarCarrito(){
+  let productosCarrito = []
+  localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito))
+  cargarCarrito ();
+        updateTotals ();
+        let envioSeleccionado = document.getElementById('tipo-envio').value
+        costoEnvioyTotal(envioSeleccionado);
+        mensajeCompra.innerHTML = "";
+}
