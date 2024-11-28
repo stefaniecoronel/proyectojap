@@ -313,6 +313,7 @@ if (envioSeleccionado==15){
       mensajeCompra.innerHTML = `<div class="alert alert-success alert-overlay text-center" role="alert">
       ¡Compra finalizada con éxito!
       </div>`
+      registrarCompra();
     }
  });
 
@@ -323,4 +324,39 @@ openModal.addEventListener('click', function(){
 mensajeCompra.innerHTML = ""
 });
 
+function registrarCompra(){
+ 
+  let contenidoCarrito = productosCarrito.map(producto => ({
+    productoID: producto.id,
+    unidadesVendidas: producto.cantidad
+  }))
+
+  let cartData = {
+    NombreUsuario: localStorage.getItem('nombre'),
+    items: contenidoCarrito
+  };
+
+
+  fetch(CART_URL, { 
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json', 
+    },
+    body: JSON.stringify(cartData), 
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error en la solicitud: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Respuesta del servidor:', data);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+
+};
 

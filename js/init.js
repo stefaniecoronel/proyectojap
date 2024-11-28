@@ -6,6 +6,7 @@ const PRODUCT_INFO_COMMENTS_URL = `http://localhost:3000/products_comments/`;
 const CART_INFO_URL = "http://localhost:3000/user_cart/25801";
 const CART_BUY_URL = "http://localhost:3000/cart/buy";
 const EXT_TYPE = ".json";
+const CART_URL = "http://localhost:3000/cart";
 
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
