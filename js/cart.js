@@ -330,6 +330,7 @@ openModal.addEventListener('click', function(){
 mensajeCompra.innerHTML = ""
 });
 
+//Esta función toma el ID y la cantidad de cada uno de los productos del carrito y realizar una solicitud POST para que se registre la compra en la tabla compras de la base de datos del ecommerce.
 function registrarCompra(){
  
   let contenidoCarrito = productosCarrito.map(producto => ({
@@ -366,6 +367,7 @@ function registrarCompra(){
 
 };
 
+//Esta función se utiliza para vaciar el carrito una vez que se finaliza de forma correcta la compra. 
 function vaciarCarrito(){
   let productosCarrito = []
   localStorage.setItem('producto-carrito', JSON.stringify(productosCarrito))
@@ -373,5 +375,5 @@ function vaciarCarrito(){
         updateTotals ();
         let envioSeleccionado = document.getElementById('tipo-envio').value
         costoEnvioyTotal(envioSeleccionado);
-        mensajeCompra.innerHTML = "";
+      
 }
