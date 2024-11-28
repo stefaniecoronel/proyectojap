@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     fotoPerfil: localStorage.getItem('foto-perfil')
                 }
                 localStorage.setItem('datos-usuario', JSON.stringify(datosUsuario))
+                guardarUsuario(datosUsuario);
             }
        // Guardo lo que el usuario envie como preferencia de modo (día o noche) en el local storage
             if (switchNightMode.checked){
@@ -78,4 +79,54 @@ document.addEventListener('DOMContentLoaded', function(){
     reader.readAsDataURL(file);
     }
     });
+
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(event) {
+        if (!isProfileComplete()) {
+        event.preventDefault(); 
+        alert("Debes completar tu perfil antes de continuar."); 
+        }
+        });
+        });
+
 });
+
+function isProfileComplete(){
+    let userData = JSON.parse(localStorage.getItem('datos-usuario'))
+
+    if (userData.apellido != "" && userData.email != ""){
+        return true;
+    } else {
+        return false;
+    }
+   
+};
+
+function guardarUsuario(usuario){
+
+    delete usuario.fotoPerfil
+
+    let nombreUsuario = localStorage.getItem('nombre')
+
+    usuario.nombreUsuario = nombreUsuario
+
+    fetch(USER_DATA_URL, { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', 
+        },
+        body: JSON.stringify(usuario), 
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error en la solicitud: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Respuesta del servidor:', data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+}

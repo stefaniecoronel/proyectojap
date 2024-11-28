@@ -33,7 +33,7 @@ document.addEventListener ('submit',function(event){
                 alert('Login exitoso.');
                 // Redirigir al usuario
                 localStorage.setItem('token', data.token)
-                window.location.href = "index.html";
+                window.location.href = "my-profile.html";
             })
             .catch(err => {
                 console.error('Error al enviar la solicitud:', err);
